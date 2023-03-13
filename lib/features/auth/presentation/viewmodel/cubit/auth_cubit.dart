@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/constants_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,14 +39,16 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   login(String email, String password, String type) async {
-    // emit(LoginLoading());
+    emit(LoginLoading());
+    Timer(const Duration(seconds: 4), () {
+      emit(LoginFailed(AppStrings.noInternetConnection));
+    });
     // todo add functions
-    emit(LoginSuccessfully());
-    //emit(LoginFailed(AppStrings.noInternetConnection));
+    //emit(LoginSuccessfully());
   }
 
   register() async {
-    emit(RegisterLoading());
+    //  emit(RegisterLoading());
     // todo add functions
     emit(LoginFailed(AppStrings.noInternetConnection));
   }
