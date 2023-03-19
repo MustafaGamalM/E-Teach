@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/utilis/app_manager/app_reference.dart';
-import '../../core/utilis/di.dart';
+import '../../../../core/utilis/app_manager/app_reference.dart';
+import '../../../../core/utilis/di.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -31,8 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (appReference.sharedPreferences.getBool(ONBOARDING_VIEWED_KEY) == true) {
       if (appReference.sharedPreferences.getBool(LOGGEDIN_VIEWED_KEY) == true) {
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      } else {
+        Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
       }
-      Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
     } else {
       Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
     }

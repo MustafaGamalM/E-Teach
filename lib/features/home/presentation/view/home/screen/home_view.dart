@@ -1,11 +1,11 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
+import 'package:e_teach/features/home/presentation/view/home/widgets/custom_courses_widget.dart';
 import 'package:e_teach/features/widgets/custom_row_widget.dart';
 import 'package:e_teach/features/widgets/profile_widget.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,33 +49,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 2.h,
               ),
-              Container(
-                height: 10.h,
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic4.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                    SvgPicture.asset('assets/images/ic1.svg'),
-                  ],
-                ),
-              ),
+              const CustomCoursesWidget()
             ]),
           ),
         )

@@ -3,6 +3,7 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
+import 'package:e_teach/core/widgets/custom_popup.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:e_teach/features/widgets/toast_widget.dart';
@@ -30,10 +31,15 @@ class RegistertionScreen extends StatelessWidget {
         if (state is RegisterSuccessfully) {
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
           appReference.loggedInViewed();
-        } else if (state is LoginFailed) {
-          // todo : add pop up
-        } else if (state is LoginLoading) {
-          // todo : add pop up
+        } else if (state is RegisterFailed) {
+          customPopUp(context,
+              isLoading: false,
+              onPressed: () {},
+              errorMsg: state.errorMsg,
+              title: 'Error');
+        } else if (state is RegisterLoading) {
+          customPopUp(context,
+              isLoading: true, onPressed: () {}, title: 'Loading');
         }
       },
       builder: (context, state) {
@@ -164,7 +170,11 @@ class RegistertionScreen extends StatelessWidget {
                                     mobileNumberController.text.isNotEmpty)
                                 ? (confirmPasswordController.text ==
                                         passwordController.text)
-                                    ? cubit.register()
+                                    ? cubit.register(
+                                        emailController.text,
+                                        passwordController.text,
+                                        "",
+                                        nameController.text)
                                     : showToast(AppStrings.passwordNotMatch)
                                 : showToast(AppStrings.addYourDetails);
                           },

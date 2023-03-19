@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatelessWidget {
-  AppReference appReference = instance<AppReference>();
+  final AppReference _appReference = instance<AppReference>();
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -28,19 +28,18 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccessfully) {
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
-          appReference.loggedInViewed();
+          _appReference.loggedInViewed();
         } else if (state is LoginFailed) {
-          customPopUp(context,
-              isLoading: false,
-              onPressed: () => print('clicked'),
-              errorMsg: 'Er',
-              title: 'd');
+          customPopUp(context, isLoading: false, onPressed: () async {
+            await BlocProvider.of<AuthCubit>(context)
+                .login(_emailController.text, _passwordController.text, "1");
+          }, errorMsg: state.errorMsg, title: 'Error');
         } else if (state is LoginLoading) {
           customPopUp(context,
-              isLoading: true,
-              onPressed: () {},
-              errorMsg: 'Loading Mesg',
-              title: 'Lol');
+              isLoading: true, onPressed: () {}, title: 'Loading');
+        } else if (state is LoginSuccessfully) {
+          _appReference.loggedInViewed();
+          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
         }
       },
       builder: (context, state) {

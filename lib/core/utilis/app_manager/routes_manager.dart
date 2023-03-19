@@ -1,12 +1,18 @@
+import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:e_teach/core/utilis/di.dart';
+import 'package:e_teach/features/auth/data/repo/auth_repo.dart';
+import 'package:e_teach/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:e_teach/features/auth/presentation/view/login_view.dart';
 import 'package:e_teach/features/auth/presentation/view/register_view.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/auth/presentation/view/forget_password_view.dart';
-import 'package:e_teach/features/home/presentation/view/main_screen.dart';
-import 'package:e_teach/features/onboarding/presntation/view/onboarding.dart';
+import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
+import 'package:e_teach/features/home/presentation/view/main_view.dart';
+import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
+import 'package:e_teach/features/onboarding/presntation/view/onboarding_view.dart';
 import 'package:e_teach/features/onboarding/presntation/viewmodel/cubit/on_boarding_cubit.dart';
-import 'package:e_teach/features/splash/splash_screen.dart';
+import 'package:e_teach/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,17 +33,21 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case Routes.loginRoute:
+        initAuthModule();
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(),
+            create: (context) =>
+                AuthCubit(instance<AuthReoImpl>(), instance<AppReference>()),
             child: LoginScreen(),
           ),
         );
 
       case Routes.registerRoute:
+        initAuthModule();
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(),
+            create: (context) =>
+                AuthCubit(instance<AuthReoImpl>(), instance<AppReference>()),
             child: RegistertionScreen(),
           ),
         );
@@ -50,14 +60,21 @@ class RouteGenerator {
           ),
         );
       case Routes.mainRoute:
+        initHomeModule();
         return MaterialPageRoute(
-          builder: (_) => MainScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                MainCubit(instance<HomeRepoImpl>())..getCourses(),
+            child: MainScreen(),
+          ),
         );
 
       case Routes.forgetPasswordRoute:
+        initAuthModule();
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(),
+            create: (context) =>
+                AuthCubit(instance<AuthReoImpl>(), instance<AppReference>()),
             child: ForgetPasswordScreen(),
           ),
         );
