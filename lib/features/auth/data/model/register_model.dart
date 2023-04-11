@@ -1,41 +1,54 @@
 class RegisterModel {
-  String? status;
-  String? message;
-  User? user;
-  Authorisation? authorisation;
+  Response? response;
 
-  RegisterModel({this.status, this.message, this.user, this.authorisation});
+  RegisterModel({this.response});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    authorisation = json['authorisation'] != null
-        ? Authorisation.fromJson(json['authorisation'])
+    response = json['Response'] != null
+        ?  Response.fromJson(json['Response'])
         : null;
   }
 }
 
-class User {
-  String? name;
-  String? email;
-  int? id;
+class Response {
+  String? msg;
+  int? statusCode;
+  Data? data;
 
-  User({this.name, this.email, this.id});
+  Response({this.msg, this.statusCode, this.data});
 
-  User.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    email = json['email'];
-    id = json['id'];
+  Response.fromJson(Map<String, dynamic> json) {
+    msg = json['msg'];
+    statusCode = json['statusCode'];
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 }
 
-class Authorisation {
+class Data {
+  String? name;
+  String? email;
+  String? type;
+  String? updatedAt;
+  String? createdAt;
+  int? id;
   String? token;
 
-  Authorisation({this.token});
+  Data(
+      {this.name,
+      this.email,
+      this.type,
+      this.updatedAt,
+      this.createdAt,
+      this.id,
+      this.token});
 
-  Authorisation.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    type = json['type'];
+    updatedAt = json['updated_at'];
+    createdAt = json['created_at'];
+    id = json['id'];
     token = json['token'];
   }
 }

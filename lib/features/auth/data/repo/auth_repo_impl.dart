@@ -17,10 +17,13 @@ class AuthReoImpl implements AuthRepo {
       var res = await _apiService.pos(
           endPoint: AppConstatns.loginEndPoint,
           data: {"email": email, "password": password});
+      if (res['Response']['statusCode'] == 200) {
+        LoginModel loginModel = LoginModel.fromJson(res);
 
-      LoginModel loginModel = LoginModel.fromJson(res);
-
-      return Right(loginModel);
+        return Right(loginModel);
+      } else {
+        return left(ServerFailure(res['Response']['msg']));
+      }
     } catch (e) {
       if (e is DioError) {
         return left(
@@ -37,16 +40,30 @@ class AuthReoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, RegisterModel>> register(
-      String email, String name, String password) async {
+      String email, String name, String password, String type) async {
     try {
       var res = await _apiService.pos(
           endPoint: AppConstatns.registerEndPoint,
-          data: {"email": email, "password": password, "name": name});
+          data: {
+            "email": email,
+            "password": password,
+            "name": name,
+            "type": type
+          });
 
-      RegisterModel registerModel = RegisterModel.fromJson(res);
-
-      return Right(registerModel);
+      if (res != null) {
+        RegisterModel registerModel = RegisterModel.fromJson(res);
+        print('===righttt====');
+        return Right(registerModel);
+      } else {
+        print('====lefttt===');
+        return left(
+          ServerFailure(res['Response']['msg']),
+        );
+      }
     } catch (e) {
+      print(e);
+      print('=======');
       if (e is DioError) {
         return left(
           ServerFailure.fromDioError(e),

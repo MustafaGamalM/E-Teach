@@ -5,6 +5,8 @@ import 'package:e_teach/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
+import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
+import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +42,20 @@ Future<void> initHomeModule() async {
     );
     instance.registerFactory<MainCubit>(
       () => MainCubit(instance()),
+    );
+  }
+}
+
+Future<void> initProfileModule() async {
+  if (!GetIt.I.isRegistered<ProfileRepoImpl>()) {
+    instance.registerFactory<ProfileRepoImpl>(
+      () => ProfileRepoImpl(
+        instance.get<ApiService>(),
+        instance.get<AppReference>(),
+      ),
+    );
+    instance.registerFactory<ProfileCubit>(
+      () => ProfileCubit(instance()),
     );
   }
 }

@@ -6,5 +6,5 @@ import 'package:e_teach/features/auth/data/model/register_model.dart';
 abstract class AuthRepo {
   Future<Either<Failure, LoginModel>> login(String email, String password);
   Future<Either<Failure, RegisterModel>> register(
-      String email, String name, String password);
+      String email, String name, String password, String type);
 }

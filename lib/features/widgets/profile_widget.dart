@@ -5,7 +5,9 @@ import 'package:sizer/sizer.dart';
 
 class AvaterWidget extends StatelessWidget {
   final String image;
-  const AvaterWidget(this.image, {super.key});
+  final double? height;
+  final double? width;
+  const AvaterWidget(this.image, {super.key, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +16,8 @@ class AvaterWidget extends StatelessWidget {
         // todo : navigate to  profile screen
       },
       child: Container(
-        width: 1.h,
-        height: 1.h,
+        width: width ?? 1.h,
+        height: height ?? 1.h,
         margin: EdgeInsets.all(.70.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s360),

@@ -42,26 +42,30 @@ class AuthCubit extends Cubit<AuthState> {
     emit(TypeChanged());
   }
 
-  login(String email, String password, String type) async {
+  login(String email, String password) async {
+    print(email);
+    print(password);
     emit(LoginLoading());
     var res = await _authRepo.login(email, password);
     res.fold((failure) {
       emit(LoginFailed(failure.errMessage));
     }, (succes) {
-      emit(LoginSuccessfully());
-      _appReference.setToken(succes.authorisation!.token!);
+      emit(LoginSuccessfully(
+          succes.response!.data!.name!, succes.response!.data!.email!));
+      _appReference.setToken(succes.response!.data!.token!);
     });
   }
 
   register(String email, String password, String type, String name) async {
     //  emit(RegisterLoading());
     emit(RegisterLoading());
-    var res = await _authRepo.register(email, name, password);
+    var res = await _authRepo.register(email, name, password, type);
     res.fold((failure) {
       emit(RegisterFailed(failure.errMessage));
     }, (succes) {
-      emit(RegisterSuccessfully());
-      _appReference.setToken(succes.authorisation!.token!);
+      emit(RegisterSuccessfully(
+          succes.response!.data!.name!, succes.response!.data!.email!));
+      _appReference.setToken(succes.response!.data!.token!);
     });
   }
 

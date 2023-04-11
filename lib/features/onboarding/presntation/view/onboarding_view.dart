@@ -85,7 +85,7 @@ class OnBoardingScreen extends StatelessWidget {
                         cubit.currentPage--;
                         _pageController.previousPage(
                             duration: const Duration(
-                                seconds: AppConstants.animationTimePage),
+                                seconds: ConstantsManager.animationTimePage),
                             curve: Curves.easeIn);
                       }, const Icon(Icons.arrow_back_sharp)),
                     const Spacer(),
@@ -98,7 +98,7 @@ class OnBoardingScreen extends StatelessWidget {
                         cubit.currentPage++;
                         _pageController.nextPage(
                             duration: const Duration(
-                                seconds: AppConstants.animationTimePage),
+                                seconds: ConstantsManager.animationTimePage),
                             curve: Curves.easeIn);
                       }
                     }, const Icon(Icons.arrow_forward))

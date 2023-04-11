@@ -31,7 +31,7 @@ Future<void> customPopUp(BuildContext context,
               height: AppSize.s200,
               width: AppSize.s200,
               child: LottieBuilder.asset(
-                  isLoading ? JsonAssets.loading : JsonAssets.error),
+                  isLoading ? JsonAssets.cricleLoading : JsonAssets.error),
             ),
           ),
           if (!isLoading)

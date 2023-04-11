@@ -3,11 +3,10 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
-import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
 import 'package:e_teach/core/widgets/custom_popup.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
+import 'package:e_teach/features/widgets/custom_button.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
-import 'package:e_teach/features/widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -18,7 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   final TextEditingController _passwordController = TextEditingController();
 
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   LoginScreen({super.key});
 
@@ -29,10 +28,12 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginSuccessfully) {
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
           _appReference.loggedInViewed();
+          _appReference.setUserEmail(state.email);
+          _appReference.setUserName(state.name);
         } else if (state is LoginFailed) {
           customPopUp(context, isLoading: false, onPressed: () async {
             await BlocProvider.of<AuthCubit>(context)
-                .login(_emailController.text, _passwordController.text, "1");
+                .login(_emailController.text, _passwordController.text);
           }, errorMsg: state.errorMsg, title: 'Error');
         } else if (state is LoginLoading) {
           customPopUp(context,
@@ -78,6 +79,12 @@ class LoginScreen extends StatelessWidget {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         labelText: AppStrings.email,
+                        validator: (v) {
+                          if (v!.isEmpty) {
+                            return AppStrings.email;
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(
                         height: 5.h,
@@ -87,6 +94,12 @@ class LoginScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           labelText: AppStrings.password,
                           obscureText: cubit.obsucre,
+                          validator: (v) {
+                            if (v!.isEmpty) {
+                              return AppStrings.password;
+                            }
+                            return null;
+                          },
                           suffixIcon: InkWell(
                             onTap: () {
                               cubit.chageObsucre();
@@ -96,53 +109,14 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 5.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                              child: RadioListTile(
-                                  dense: true,
-                                  selectedTileColor: ColorManager.black,
-                                  activeColor: ColorManager.black,
-                                  value: AppStrings.student,
-                                  title: const Text(AppStrings.student),
-                                  groupValue: cubit.userType,
-                                  onChanged: (value) {
-                                    cubit.changeType(value!);
-                                  })),
-                          Expanded(
-                              child: RadioListTile(
-                                  selectedTileColor: ColorManager.black,
-                                  activeColor: ColorManager.black,
-                                  value: AppStrings.instructor,
-                                  title: Text(AppStrings.instructor),
-                                  groupValue: cubit.userType,
-                                  onChanged: (value) {
-                                    cubit.changeType(value!);
-                                  })),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: MaterialButton(
-                          color: ColorManager.cien,
-                          onPressed: () async {
-                            (_emailController.text.isNotEmpty &&
-                                    _passwordController.text.isNotEmpty)
-                                ? cubit.login(_emailController.text,
-                                    _passwordController.text, cubit.userType)
-                                : showToast(AppStrings.addYourDetails);
-                          },
-                          child: Text(AppStrings.login,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(color: ColorManager.white)),
-                        ),
-                      ),
+                      CustomButton(
+                          title: AppStrings.login,
+                          onPressd: () {
+                            if (_formKey.currentState!.validate()) {
+                              cubit.login(_emailController.text,
+                                  _passwordController.text);
+                            }
+                          }),
                       SizedBox(
                         height: 1.h,
                       ),

@@ -13,7 +13,12 @@ class TypeChanged extends AuthInitial {}
 
 class LoginLoading extends AuthInitial {}
 
-class LoginSuccessfully extends AuthInitial {}
+class LoginSuccessfully extends AuthInitial {
+  final String name;
+  final String email;
+
+  LoginSuccessfully(this.name, this.email);
+}
 
 class LoginFailed extends AuthInitial {
   final String errorMsg;
@@ -24,7 +29,12 @@ class LoginFailed extends AuthInitial {
 
 class RegisterLoading extends AuthInitial {}
 
-class RegisterSuccessfully extends AuthInitial {}
+class RegisterSuccessfully extends AuthInitial {
+  final String name;
+  final String email;
+
+  RegisterSuccessfully(this.name, this.email);
+}
 
 class RegisterFailed extends AuthInitial {
   final String errorMsg;

@@ -26,11 +26,12 @@ class ServerFailure extends Failure {
       case DioErrorType.connectionError:
         return ServerFailure('connectionError with ApiServer');
       case DioErrorType.unknown:
-        if (dioError.message!.contains('SocketException')) {
-          return ServerFailure('No Internet Connection');
-        } else {
-          return ServerFailure('Unexpected Error, Please try again!');
-        }
+        return ServerFailure('Unexpected Error, Please try again!');
+      // if (dioError.message.contains('SocketException')) {
+      //   return ServerFailure('No Internet Connection');
+      // } else {
+      //   return ServerFailure('Unexpected Error, Please try again!');
+      // }
       default:
         return ServerFailure('Opps There was an Error, Please try again');
     }

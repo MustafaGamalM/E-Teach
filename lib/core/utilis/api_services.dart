@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:flutter/foundation.dart';
 
 class ApiService {
   final _baseUrl = 'http://127.0.0.1:8000/api/';
@@ -12,17 +11,11 @@ class ApiService {
       {required String endPoint,
       Map<String, dynamic>? query,
       Map<String, dynamic>? data}) async {
-    var response = await _dio.get('$_baseUrl$endPoint',
-        queryParameters: query, data: data);
-    return response.data;
-  }
-
-  Future<List<dynamic>> getList(
-      {required String endPoint,
-      Map<String, dynamic>? query,
-      Map<String, dynamic>? data}) async {
-    var response = await _dio.get('$_baseUrl$endPoint',
-        queryParameters: query, data: data);
+    var response = await _dio.get(
+      '$_baseUrl$endPoint',
+      queryParameters: query,
+      data: data,
+    );
     return response.data;
   }
 
@@ -34,13 +27,4 @@ class ApiService {
         queryParameters: query, data: data);
     return response.data;
   }
-
-  //  if(!kReleaseMode){
-  //   _dio.interceptors.add(PrettyDioLogger(
-  //     requestHeader : true,
-  //     requestBody : true,
-  //     responseHeader : true,
-  //   ));
-  //   }
-
 }

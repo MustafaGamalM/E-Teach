@@ -1,6 +1,7 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomAuthFormFiled extends StatelessWidget {
   final TextEditingController controller;
@@ -93,8 +94,8 @@ class CustomAuthFormFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: ColorManager.lightGrey,
-          borderRadius: BorderRadius.circular(AppSize.s17)),
+        borderRadius: BorderRadius.circular(AppSize.s140),
+      ),
       child: TextFormField(
           autofocus: autofocus,
           textInputAction: textInputAction,
@@ -119,6 +120,8 @@ class CustomAuthFormFiled extends StatelessWidget {
           decoration: InputDecoration(
             counterText: '',
             suffixStyle: suffixTextStyle,
+            fillColor: ColorManager.lightGrey,
+            filled: true,
             suffixText: suffixText,
             errorMaxLines: errorMaxLines,
             contentPadding: contentPadding,
@@ -127,6 +130,31 @@ class CustomAuthFormFiled extends StatelessWidget {
             prefixIcon: prefixIcon,
             border: InputBorder.none,
             suffixIcon: suffixIcon,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: ColorManager.lightGrey, width: AppSize.s1),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(AppSize.s24))),
+
+            // focused border style
+            focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: ColorManager.cien, width: AppSize.s1),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(AppSize.s24))),
+
+            errorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: ColorManager.red, width: AppSize.s1),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(AppSize.s24))),
+
+            // error focused border style
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: ColorManager.red, width: AppSize.s1),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(AppSize.s24))),
           )),
     );
   }

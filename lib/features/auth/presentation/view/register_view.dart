@@ -5,6 +5,7 @@ import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/core/widgets/custom_popup.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
+import 'package:e_teach/features/widgets/custom_button.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:e_teach/features/widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,10 @@ class RegistertionScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController mobileNumberController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   RegistertionScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,6 +30,8 @@ class RegistertionScreen extends StatelessWidget {
         if (state is RegisterSuccessfully) {
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
           appReference.loggedInViewed();
+          appReference.setUserEmail(state.email);
+          appReference.setUserName(state.name);
         } else if (state is RegisterFailed) {
           customPopUp(context,
               isLoading: false,
@@ -78,6 +79,12 @@ class RegistertionScreen extends StatelessWidget {
                         controller: nameController,
                         keyboardType: TextInputType.emailAddress,
                         labelText: AppStrings.name,
+                        validator: (v) {
+                          if (v!.isEmpty) {
+                            return AppStrings.pleaseEnterName;
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(
                         height: 3.h,
@@ -86,14 +93,12 @@ class RegistertionScreen extends StatelessWidget {
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         labelText: AppStrings.email,
-                      ),
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      CustomAuthFormFiled(
-                        controller: mobileNumberController,
-                        keyboardType: TextInputType.number,
-                        labelText: AppStrings.mobileNumber,
+                        validator: (v) {
+                          if (v!.isEmpty) {
+                            return AppStrings.pleaseEnterEmail;
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(
                         height: 3.h,
@@ -103,20 +108,12 @@ class RegistertionScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           labelText: AppStrings.password,
                           obscureText: cubit.obsucre,
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              cubit.chageObsucre();
-                            },
-                            child: cubit.eyeIcon,
-                          )),
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      CustomAuthFormFiled(
-                          controller: confirmPasswordController,
-                          keyboardType: TextInputType.emailAddress,
-                          labelText: AppStrings.confirmPassword,
-                          obscureText: cubit.obsucre,
+                          validator: (v) {
+                            if (v!.isEmpty) {
+                              return AppStrings.pleaseEnterPassword;
+                            }
+                            return null;
+                          },
                           suffixIcon: InkWell(
                             onTap: () {
                               cubit.chageObsucre();
@@ -158,33 +155,17 @@ class RegistertionScreen extends StatelessWidget {
                       SizedBox(
                         height: 1.h,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: MaterialButton(
-                          color: ColorManager.cien,
-                          onPressed: () {
-                            (emailController.text.isNotEmpty &&
-                                    passwordController.text.isNotEmpty &&
-                                    confirmPasswordController.text.isNotEmpty &&
-                                    nameController.text.isNotEmpty &&
-                                    mobileNumberController.text.isNotEmpty)
-                                ? (confirmPasswordController.text ==
-                                        passwordController.text)
-                                    ? cubit.register(
-                                        emailController.text,
-                                        passwordController.text,
-                                        "",
-                                        nameController.text)
-                                    : showToast(AppStrings.passwordNotMatch)
-                                : showToast(AppStrings.addYourDetails);
-                          },
-                          child: Text(AppStrings.signUp,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(color: ColorManager.white)),
-                        ),
-                      ),
+                      CustomButton(
+                          title: AppStrings.signUp,
+                          onPressd: () {
+                            if (_formKey.currentState!.validate()) {
+                              cubit.register(
+                                  emailController.text,
+                                  passwordController.text,
+                                  cubit.userType,
+                                  nameController.text);
+                            }
+                          }),
                       SizedBox(
                         height: 1.h,
                       ),

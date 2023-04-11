@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String LOGGEDIN_VIEWED_KEY = "LOGGEDIN_VIEWED_KEY";
 const String ONBOARDING_VIEWED_KEY = "ONBOARDING_VIEWED_KEY";
 const String USER_TOKEN_KEY = "USER_TOKEN_KEY";
+const String USER_NAME_KEY = "USER_NAME_KEY";
+const String USER_EMAIL_KEY = "USER_EMAIL_KEY";
 
 class AppReference {
   SharedPreferences sharedPreferences;
@@ -17,12 +19,34 @@ class AppReference {
     await sharedPreferences.setBool(ONBOARDING_VIEWED_KEY, true);
   }
 
+  Future<void> clearShared() async {
+    await sharedPreferences.clear();
+  }
+
 // ****** setter and getter user data *****
   Future<void> setToken(String token) async {
     await sharedPreferences.setString(USER_TOKEN_KEY, token);
   }
 
   Future<String> getToken() async {
-    return sharedPreferences.getString(USER_TOKEN_KEY) ?? AppConstants.empty;
+    return sharedPreferences.getString(USER_TOKEN_KEY) ??
+        ConstantsManager.empty;
+  }
+
+  Future<void> setUserName(String token) async {
+    await sharedPreferences.setString(USER_NAME_KEY, token);
+  }
+
+  Future<String> getUserName() async {
+    return sharedPreferences.getString(USER_NAME_KEY) ?? ConstantsManager.empty;
+  }
+
+  Future<void> setUserEmail(String token) async {
+    await sharedPreferences.setString(USER_EMAIL_KEY, token);
+  }
+
+  Future<String> getUserEmail() async {
+    return sharedPreferences.getString(USER_EMAIL_KEY) ??
+        ConstantsManager.empty;
   }
 }

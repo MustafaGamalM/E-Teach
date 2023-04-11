@@ -1,18 +1,19 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
-import 'package:e_teach/features/home/presentation/view/home/widgets/custom_courses_widget.dart';
+import 'package:e_teach/features/home/presentation/view/widgets/custom_courses_widget.dart';
 import 'package:e_teach/features/widgets/custom_row_widget.dart';
 import 'package:e_teach/features/widgets/profile_widget.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeView extends StatelessWidget {
+  HomeView({super.key});
+
   final TextEditingController _searchTextEditingController =
       TextEditingController();
-
-  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,19 @@ class HomeScreen extends StatelessWidget {
         SizedBox(height: 6.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: CustomAuthFormFiled(
-            keyboardType: TextInputType.text,
-            controller: _searchTextEditingController,
-            labelText: AppStrings.searchCourse,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, Routes.searchCourse);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppSize.s24),
+              child: CustomAuthFormFiled(
+                keyboardType: TextInputType.text,
+                controller: _searchTextEditingController,
+                labelText: AppStrings.searchCourse,
+                enabled: false,
+              ),
+            ),
           ),
         ),
         SizedBox(height: 10.h),
@@ -39,8 +49,8 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.only(left: 2.h, right: 2.h),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(AppSize.s24),
-                    topRight: Radius.circular(AppSize.s24)),
+                    topLeft: Radius.circular(AppSize.s10.h),
+                    topRight: Radius.circular(AppSize.s10.h)),
                 color: ColorManager.white),
             child: ListView(children: [
               CustomRowWidget(AppStrings.categories, () {

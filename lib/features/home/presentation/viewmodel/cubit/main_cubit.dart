@@ -1,13 +1,13 @@
+import 'package:e_teach/features/course/presentation/view/course_videos_view.dart';
 import 'package:e_teach/features/home/data/model/course_model.dart';
+import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo.dart';
-import 'package:e_teach/features/home/presentation/view/home/screen/home_view.dart';
-import 'package:e_teach/features/home/presentation/view/profile_view.dart';
-import 'package:e_teach/features/home/presentation/view/screen1.dart';
-import 'package:e_teach/features/home/presentation/view/screen2.dart';
-import 'package:e_teach/features/home/presentation/view/screen3.dart';
+import 'package:e_teach/features/home/presentation/view/home_view.dart';
+import 'package:e_teach/features/profile/presentation/view/profile_view.dart';
+import 'package:e_teach/features/rooms/presentation/view/room_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'main_state.dart';
 
@@ -19,11 +19,10 @@ class MainCubit extends Cubit<MainState> {
   final HomeRepo _homeRepo;
 
   List<Widget> mainScreen = [
-    Screen1(),
-    Screen2(),
-    HomeScreen(),
-    Screen3(),
-    ProfileScreen()
+    const RoomView(),
+    const UserCoursesView(),
+    HomeView(),
+    const ProfileView()
   ];
 
   void changePage(int screenIndex) {
@@ -38,6 +37,16 @@ class MainCubit extends Cubit<MainState> {
       emit(GetCourseFailed(failure.errMessage));
     }, (courses) {
       emit(GetCourseSuccessfully(courses));
+    });
+  }
+
+  getCourseById(int courseId) async {
+    emit(GetCourseByIdLoading());
+    var res = await _homeRepo.getCourseById(courseId);
+    res.fold((failure) {
+      emit(GetCourseByIdFailed(failure.errMessage));
+    }, (course) {
+      emit(GetCourseByIdSuccessfully(course));
     });
   }
 }

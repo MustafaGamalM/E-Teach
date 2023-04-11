@@ -21,15 +21,11 @@ class MainScreen extends StatelessWidget {
                 color: ColorManager.white,
               ),
               Icon(
-                Icons.favorite,
+                Icons.list,
                 color: ColorManager.white,
               ),
               Icon(
                 Icons.home,
-                color: ColorManager.white,
-              ),
-              Icon(
-                Icons.list,
                 color: ColorManager.white,
               ),
               Icon(

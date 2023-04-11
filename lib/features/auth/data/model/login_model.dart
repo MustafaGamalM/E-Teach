@@ -1,39 +1,53 @@
 class LoginModel {
-  String? status;
-  User? user;
-  Authorisation? authorisation;
+  Response? response;
 
-  LoginModel({this.status, this.user, this.authorisation});
+  LoginModel({this.response});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    authorisation = json['authorisation'] != null
-        ? Authorisation.fromJson(json['authorisation'])
-        : null;
+    response =
+        json['Response'] != null ? Response.fromJson(json['Response']) : null;
   }
 }
 
-class User {
+class Response {
+  String? msg;
+  int? statusCode;
+  Data? data;
+
+  Response({this.msg, this.statusCode, this.data});
+
+  Response.fromJson(Map<String, dynamic> json) {
+    msg = json['msg'];
+    statusCode = json['statusCode'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  }
+}
+
+class Data {
   int? id;
   String? name;
   String? email;
+  String? type;
+  String? createdAt;
+  String? updatedAt;
+  String? token;
 
-  User({this.id, this.name, this.email});
+  Data(
+      {this.id,
+      this.name,
+      this.email,
+      this.type,
+      this.createdAt,
+      this.updatedAt,
+      this.token});
 
-  User.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-  }
-}
-
-class Authorisation {
-  String? token;
-
-  Authorisation({this.token});
-
-  Authorisation.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     token = json['token'];
   }
 }

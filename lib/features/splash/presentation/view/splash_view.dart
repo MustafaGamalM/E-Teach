@@ -24,7 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Timer? _timer;
   void _startDelay() {
-    _timer = Timer(const Duration(seconds: AppConstants.timerDelay), _goNext);
+    _timer =
+        Timer(const Duration(seconds: ConstantsManager.timerDelay), _goNext);
   }
 
   _goNext() {

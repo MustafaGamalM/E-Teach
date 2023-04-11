@@ -17,7 +17,9 @@ class AppStrings {
   static const String alreadyHaveAnAccount = "Already have an Account?";
   static const String passwordNotMatch =
       "Confirm password Don't match your password ";
-
+  static const String profile = "Profile";
+  static const String moreInfo = "More Information";
+  static const String update = "Update";
   static const String studentDescrition =
       "Welcome to the first app in theArab world for online study Herein the student's part he will haveseveral educational courses andwill be able to enroll through anycourse when paying the verysimple material fee.";
   static const String instructorDescrition =
@@ -37,4 +39,10 @@ class AppStrings {
   static const String loading = "Loading";
   static const String ok = "ok";
   static const String retryAgain = "retry again";
+  static const String pleaseEnterEmail = "Please enter email";
+  static const String pleaseEnterName = "Please enter name";
+  static const String pleaseEnterPassword = "Please enter password";
+  static const String courseName = "Course name  : ";
+  static const String logout = "Logout";
+  static const String yourLearining = "Your Learning";
 }
