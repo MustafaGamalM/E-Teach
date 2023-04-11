@@ -3,6 +3,7 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/home/presentation/view/widgets/custom_courses_widget.dart';
+import 'package:e_teach/features/home/presentation/view/widgets/custom_room.dart';
 import 'package:e_teach/features/widgets/custom_row_widget.dart';
 import 'package:e_teach/features/widgets/profile_widget.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
@@ -27,7 +28,7 @@ class HomeView extends StatelessWidget {
       body: Column(children: [
         SizedBox(height: 6.h),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          padding: EdgeInsets.symmetric(horizontal: 6.w),
           child: InkWell(
             onTap: () {
               Navigator.pushNamed(context, Routes.searchCourse);
@@ -43,7 +44,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 5.h),
         Expanded(
           child: Container(
             padding: EdgeInsets.only(left: 2.h, right: 2.h),
@@ -57,9 +58,13 @@ class HomeView extends StatelessWidget {
                 return print('click');
               }),
               SizedBox(
-                height: 2.h,
+                height: 4.h,
               ),
-              const CustomCoursesWidget()
+              const CustomCoursesWidget(),
+              SizedBox(
+                height: AppSize.s1.h,
+              ),
+              const CustomRoomsWidget()
             ]),
           ),
         )
