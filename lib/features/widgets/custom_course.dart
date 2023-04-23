@@ -21,6 +21,7 @@ class CustomCourse extends StatelessWidget {
         width: 20.h,
         height: 20.h,
         padding: EdgeInsets.all(AppPadding.p1.h),
+        margin: EdgeInsets.all(AppPadding.p1.h),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s24),
@@ -39,7 +40,7 @@ class CustomCourse extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
               style: getMediumText(
-                  color: ColorManager.black, fontSize: AppSize.s10),
+                  color: ColorManager.black, fontSize: AppSize.s9.sp),
             )
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/widgets/custom_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,25 +15,32 @@ class CustomErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Padding(
-      padding: EdgeInsets.all(AppPadding.p8.h),
-      child: Column(
-        children: [
-          LottieBuilder.asset(
-            JsonAssets.error,
-            fit: BoxFit.cover,
-            height: 20.h,
-            width: 20.w,
-          ),
-          SizedBox(
-            height: AppSize.s8.h,
-          ),
-          TextButton(
-            child: Text(AppStrings.retryAgain),
-            onPressed: voidCallback,
-          )
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(AppPadding.p2.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            LottieBuilder.asset(
+              JsonAssets.error,
+              //    fit: BoxFit.cover,
+              height: AppSize.s24.h,
+              width: AppSize.s24.h,
+            ),
+            SizedBox(
+              height: AppSize.s1.h,
+            ),
+            TextButton(
+              onPressed: voidCallback,
+              child: Text(
+                AppStrings.retryAgain,
+                style: getMediumText(
+                    color: Colors.black, fontSize: AppSize.s12.sp),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

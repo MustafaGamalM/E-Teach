@@ -45,4 +45,7 @@ class AppStrings {
   static const String courseName = "Course name  : ";
   static const String logout = "Logout";
   static const String yourLearining = "Your Learning";
+  static const String courses = "Courses";
+  static const String rooms = "Rooms";
+  static const String removeAccount = "Remove account";
 }

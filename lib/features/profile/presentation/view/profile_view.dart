@@ -86,30 +86,22 @@ class _ProfileViewState extends State<ProfileView> {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(AppPadding.p2.h),
+              padding: EdgeInsets.only(
+                  left: AppPadding.p2.h,
+                  right: AppPadding.p2.h,
+                  top: AppPadding.p8.h,
+                  bottom: AppPadding.p4.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      'name',
-                      style: getBoldText(
-                          color: ColorManager.black, fontSize: AppSize.s12.sp),
-                    ),
-                  ),
-                  SizedBox(
-                    height: AppSize.s10.h,
-                  ),
                   Text(
                     textAlign: TextAlign.left,
                     AppStrings.moreInfo,
-                    style: getBoldText(
-                        color: ColorManager.black, fontSize: AppSize.s8.sp),
+                    style: getSemiBoldText(
+                        color: ColorManager.black, fontSize: AppSize.s10.sp),
                   ),
                   SizedBox(
-                    height: AppSize.s1.h,
+                    height: AppSize.s2.h,
                   ),
                   CustomAuthFormFiled(
                     keyboardType: TextInputType.text,
@@ -152,38 +144,40 @@ class _ProfileViewState extends State<ProfileView> {
                   SizedBox(
                     height: AppSize.s1.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton.icon(
-                          onPressed: () {
-                            cubit.logout();
-                          },
-                          icon: const Icon(
-                            Icons.logout,
-                            color: Colors.black,
-                          ),
-                          label: Text(
-                            AppStrings.logout,
-                            textAlign: TextAlign.right,
-                            style: getRegularText(
-                                color: Colors.grey, fontSize: AppSize.s16),
-                          )),
-                      ElevatedButton.icon(
-                          onPressed: () {
-                            cubit.removeAccount();
-                          },
-                          icon: const Icon(
-                            Icons.logout,
-                            color: Colors.black,
-                          ),
-                          label: Text(
-                            AppStrings.logout,
-                            textAlign: TextAlign.right,
-                            style: getRegularText(
-                                color: Colors.grey, fontSize: AppSize.s16),
-                          )),
-                    ],
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        cubit.logout();
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                      label: Text(
+                        AppStrings.logout,
+                        textAlign: TextAlign.right,
+                        style: getRegularText(
+                            color: Colors.grey, fontSize: AppSize.s16),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                        onPressed: () {
+                          cubit.removeAccount();
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.black,
+                        ),
+                        label: Text(
+                          AppStrings.removeAccount,
+                          textAlign: TextAlign.right,
+                          style: getRegularText(
+                              color: Colors.grey, fontSize: AppSize.s16),
+                        )),
                   ),
                 ],
               ),

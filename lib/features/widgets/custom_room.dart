@@ -14,17 +14,19 @@ class CustomRoonWidget extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Container(
-        width: 20.h,
-        height: 20.h,
+        width: AppSize.s18.h,
+        height: AppSize.s18.h,
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(bottom: AppSize.s3.h),
         padding: EdgeInsets.all(AppSize.s1.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s24),
             color: ColorManager.lightGrey),
-        child: Column(children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.asset(
-            ImageAssets.studentBoarding,
+            ImageAssets.onlineRoom,
             width: AppSize.s8.w,
-            height: AppSize.s10.h,
+            height: AppSize.s8.h,
             fit: BoxFit.cover,
           ),
           SizedBox(
@@ -32,8 +34,8 @@ class CustomRoonWidget extends StatelessWidget {
           ),
           Text(
             'Room Name',
-            style:
-                getLightText(color: ColorManager.grey, fontSize: AppSize.s3.sp),
+            style: getLightText(
+                color: ColorManager.grey, fontSize: AppSize.s10.sp),
             textAlign: TextAlign.center,
           )
         ]),

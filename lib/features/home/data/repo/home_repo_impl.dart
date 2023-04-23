@@ -22,8 +22,11 @@ class HomeRepoImpl implements HomeRepo {
       var res = await _apiService
           .get(endPoint: AppConstatns.coursesEndPoint, query: {"token": token});
       CourseModel courses = CourseModel.fromJson(res);
+      print('doneee');
       return Right(courses);
     } catch (e) {
+      print('eeee');
+      print(e.toString());
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
@@ -40,15 +43,19 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, SingleCourseModel>> getCourseById(int courseId) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.pos(
+      var res = await _apiService.get(
           endPoint: "show_videos_course_id",
           query: {"token": token, "course_id": courseId});
       SingleCourseModel course = SingleCourseModel.fromJson(res);
+      print('gggggggg');
       return Right(course);
     } catch (e) {
+      print('eeeee111' + e.toString());
+
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
+        print('eeeee1');
         return left(
           ServerFailure(
             e.toString(),

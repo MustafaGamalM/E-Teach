@@ -50,17 +50,23 @@ class HomeView extends StatelessWidget {
             padding: EdgeInsets.only(left: 2.h, right: 2.h),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(AppSize.s10.h),
-                    topRight: Radius.circular(AppSize.s10.h)),
+                    topLeft: Radius.circular(AppSize.s4.h),
+                    topRight: Radius.circular(AppSize.s4.h)),
                 color: ColorManager.white),
-            child: ListView(children: [
-              CustomRowWidget(AppStrings.categories, () {
+            child: ListView(physics: const BouncingScrollPhysics(), children: [
+              CustomRowWidget(AppStrings.courses, () {
                 return print('click');
               }),
               SizedBox(
                 height: 4.h,
               ),
               const CustomCoursesWidget(),
+              SizedBox(
+                height: AppSize.s1.h,
+              ),
+              CustomRowWidget(AppStrings.rooms, () {
+                return print('click');
+              }),
               SizedBox(
                 height: AppSize.s1.h,
               ),

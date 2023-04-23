@@ -5,6 +5,7 @@ import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 Future<void> customPopUp(BuildContext context,
     {String title = "",
@@ -28,9 +29,11 @@ Future<void> customPopUp(BuildContext context,
           Align(
             alignment: Alignment.center,
             child: SizedBox(
-              height: AppSize.s200,
-              width: AppSize.s200,
+              height: AppSize.s140,
+              width: AppSize.s140,
               child: LottieBuilder.asset(
+                  height: AppSize.s18.h,
+                  width: AppSize.s18.h,
                   isLoading ? JsonAssets.cricleLoading : JsonAssets.error),
             ),
           ),
