@@ -3,8 +3,6 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,7 +31,7 @@ class CustomRoonWidget extends StatelessWidget {
             height: AppSize.s1.h,
           ),
           Text(
-            'Rooom Name',
+            'Room Name',
             style:
                 getLightText(color: ColorManager.grey, fontSize: AppSize.s3.sp),
             textAlign: TextAlign.center,

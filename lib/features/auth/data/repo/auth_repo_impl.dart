@@ -50,7 +50,8 @@ class AuthReoImpl implements AuthRepo {
             "name": name,
             "type": type
           });
-
+      print('res');
+      print(res);
       if (res != null) {
         RegisterModel registerModel = RegisterModel.fromJson(res);
         print('===righttt====');

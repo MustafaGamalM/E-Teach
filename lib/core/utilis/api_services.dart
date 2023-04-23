@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
-  final _baseUrl = 'http://127.0.0.1:8000/api/';
+  final _baseUrl = 'https://eteach.albayan-eg.com/api/';
   final Dio _dio;
 
   ApiService(this._dio);

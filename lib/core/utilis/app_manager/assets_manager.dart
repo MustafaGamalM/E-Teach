@@ -11,6 +11,7 @@ class ImageAssets {
   static const String studentBoarding1 = "$imagePath/on_boarding_1.svg";
   static const String room = "$imagePath/room.svg";
   static const String course = "$imagePath/course_1.svg";
+  static const String roomProfile = "$imagePath/room_profile.svg";
 }
 
 class JsonAssets {
