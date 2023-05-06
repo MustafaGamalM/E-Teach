@@ -1,4 +1,5 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
@@ -29,18 +30,21 @@ class VideosCourseView extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.all(AppPadding.p2.w),
                 child: ListView.separated(
-                  itemCount: 20,
+                  itemCount: state
+                      .singleCourseModel.response!.data!.videoCourse!.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        // Navigator.pushNamed(context, Routes.courseDetails);
-                        //  print(state.singleCourseModel.response.data!.videoCourse)
+                        //https://eteach.albayan-eg.com/files/photo_2023-03-19_18-19-09.jpg
+                        Navigator.pushNamed(context, Routes.courseDetails);
+                        print(
+                            '${state.singleCourseModel.response!.data!.videoCourse![index].videos}');
                       },
                       child: Padding(
                         padding: EdgeInsets.all(AppSize.s3.h),
                         child: Row(children: [
                           Text(
-                            '1.Lecture Physics',
+                            '${state.singleCourseModel.response!.data!.videoCourse![index].name}',
                             style: getMediumText(
                                 color: ColorManager.black,
                                 fontSize: AppSize.s8.sp),

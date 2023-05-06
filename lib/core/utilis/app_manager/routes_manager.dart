@@ -7,6 +7,7 @@ import 'package:e_teach/features/auth/presentation/view/register_view.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/auth/presentation/view/forget_password_view.dart';
 import 'package:e_teach/features/course/presentation/view/course_videos_view.dart';
+import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/view/paly_course.dart';
 import 'package:e_teach/features/home/presentation/view/main_view.dart';
@@ -79,7 +80,8 @@ class RouteGenerator {
                             MainCubit(instance<HomeRepoImpl>())..getCourses()),
                     BlocProvider(
                         create: (context) =>
-                            ProfileCubit(instance<ProfileRepoImpl>())),
+                            ProfileCubit(instance<ProfileRepoImpl>())
+                              ..getAccount()),
                   ],
                   child: const MainScreen(),
                 ));
@@ -95,7 +97,13 @@ class RouteGenerator {
         );
 
       case Routes.courseDetails:
-        return MaterialPageRoute(builder: (_) => const CourseDetails());
+        return MaterialPageRoute(builder: (_) {
+          var courseId = routeSettings.arguments as Map;
+          return BlocProvider(
+            create: (context) => MainCubit(instance<HomeRepoImpl>()),
+            child: CourseDetails(id: courseId['id']),
+          );
+        });
 
       case Routes.userCourses:
         return MaterialPageRoute(builder: (_) => const UserCoursesView());

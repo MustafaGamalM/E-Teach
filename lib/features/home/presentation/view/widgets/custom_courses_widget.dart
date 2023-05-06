@@ -38,7 +38,7 @@ class _CustomCoursesWidgetState extends State<CustomCoursesWidget> {
                 return CustomCourse(
                   courseName: state.courses.response!.data![index].name!,
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.videosCourse,
+                    Navigator.pushNamed(context, Routes.courseDetails,
                         arguments: {
                           "id": state.courses.response!.data![index].id
                         });

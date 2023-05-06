@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_teach/features/profile/data/data/myprofile_model.dart';
 import 'package:e_teach/features/profile/data/repo/repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -10,7 +11,14 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _profileRepo;
   static ProfileCubit get(context) => BlocProvider.of(context);
 
-  updateUser() {}
+  updateUser(String name, String email, String password) async {
+    emit(UpdateAccountLoading());
+    var res = await _profileRepo.logout();
+    res.fold((l) => emit(UpdateAccountFailed(l.errMessage)), (r) {
+      //  getAccount();
+      emit(UpdateAccountSuccessfully());
+    });
+  }
 
   logout() async {
     emit(LogoutLoading());
@@ -24,5 +32,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     var res = await _profileRepo.removeAccount();
     res.fold((l) => emit(RemoveAccountFailed(l.errMessage)),
         (r) => emit(RemoveAccountSuccessfully()));
+  }
+
+  getAccount() async {
+    emit(GetAccountLoading());
+    var res = await _profileRepo.getAccount();
+    res.fold((l) => emit(GetAccountFailed(l.errMessage)),
+        (r) => emit(GetAccountSuccessfully(r)));
   }
 }

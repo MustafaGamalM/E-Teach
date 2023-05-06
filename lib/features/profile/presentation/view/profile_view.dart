@@ -8,6 +8,8 @@ import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/core/widgets/custom_popup.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
 import 'package:e_teach/features/widgets/custom_button.dart';
+import 'package:e_teach/features/widgets/custom_error_view.dart';
+import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,115 +77,135 @@ class _ProfileViewState extends State<ProfileView> {
       builder: (context, state) {
         var cubit = ProfileCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            centerTitle: false,
-            title: Text(
-              AppStrings.profile,
-              style: getSemiBoldText(
-                  color: ColorManager.white, fontSize: AppSize.s14.sp),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: AppPadding.p2.h,
-                  right: AppPadding.p2.h,
-                  top: AppPadding.p8.h,
-                  bottom: AppPadding.p4.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    textAlign: TextAlign.left,
-                    AppStrings.moreInfo,
-                    style: getSemiBoldText(
-                        color: ColorManager.black, fontSize: AppSize.s10.sp),
-                  ),
-                  SizedBox(
-                    height: AppSize.s2.h,
-                  ),
-                  CustomAuthFormFiled(
-                    keyboardType: TextInputType.text,
-                    controller: _nameController,
-                    labelText: AppStrings.name,
-                  ),
-                  SizedBox(
-                    height: AppSize.s1.h,
-                  ),
-                  CustomAuthFormFiled(
-                    keyboardType: TextInputType.text,
-                    controller: _emailController,
-                    labelText: AppStrings.email,
-                  ),
-                  SizedBox(
-                    height: AppSize.s1.h,
-                  ),
-                  CustomAuthFormFiled(
-                    keyboardType: TextInputType.text,
-                    controller: _passwordController,
-                    labelText: AppStrings.password,
-                  ),
-                  SizedBox(
-                    height: AppSize.s1.h,
-                  ),
-                  CustomAuthFormFiled(
-                    keyboardType: TextInputType.text,
-                    controller: _conrimNewPassdowrdController,
-                    labelText: AppStrings.confirmPassword,
-                  ),
-                  SizedBox(
-                    height: AppSize.s1.h,
-                  ),
-                  CustomButton(
-                    onPressd: () {
-                      print('ssss');
-                    },
-                    title: AppStrings.update,
-                  ),
-                  SizedBox(
-                    height: AppSize.s1.h,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        cubit.logout();
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                      label: Text(
-                        AppStrings.logout,
-                        textAlign: TextAlign.right,
-                        style: getRegularText(
-                            color: Colors.grey, fontSize: AppSize.s16),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                        onPressed: () {
-                          cubit.removeAccount();
-                        },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.black,
-                        ),
-                        label: Text(
-                          AppStrings.removeAccount,
-                          textAlign: TextAlign.right,
-                          style: getRegularText(
-                              color: Colors.grey, fontSize: AppSize.s16),
-                        )),
-                  ),
-                ],
+            appBar: AppBar(
+              centerTitle: false,
+              title: Text(
+                AppStrings.profile,
+                style: getSemiBoldText(
+                    color: ColorManager.white, fontSize: AppSize.s14.sp),
+                textAlign: TextAlign.left,
               ),
             ),
-          ),
-        );
+            body: BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                if (state is GetAccountSuccessfully) {
+                  _nameController.text =
+                      state.profileModel.response!.data!.name!;
+                  _emailController.text =
+                      state.profileModel.response!.data!.email!;
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: AppPadding.p2.h,
+                          right: AppPadding.p2.h,
+                          top: AppPadding.p8.h,
+                          bottom: AppPadding.p4.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            textAlign: TextAlign.left,
+                            AppStrings.moreInfo,
+                            style: getSemiBoldText(
+                                color: ColorManager.black,
+                                fontSize: AppSize.s10.sp),
+                          ),
+                          SizedBox(
+                            height: AppSize.s2.h,
+                          ),
+                          CustomAuthFormFiled(
+                            keyboardType: TextInputType.text,
+                            controller: _nameController,
+                            labelText: AppStrings.name,
+                          ),
+                          SizedBox(
+                            height: AppSize.s1.h,
+                          ),
+                          CustomAuthFormFiled(
+                            keyboardType: TextInputType.text,
+                            controller: _emailController,
+                            labelText: AppStrings.email,
+                          ),
+                          SizedBox(
+                            height: AppSize.s1.h,
+                          ),
+                          CustomAuthFormFiled(
+                            keyboardType: TextInputType.text,
+                            controller: _passwordController,
+                            labelText: AppStrings.password,
+                          ),
+                          SizedBox(
+                            height: AppSize.s1.h,
+                          ),
+                          CustomAuthFormFiled(
+                            keyboardType: TextInputType.text,
+                            controller: _conrimNewPassdowrdController,
+                            labelText: AppStrings.confirmPassword,
+                          ),
+                          SizedBox(
+                            height: AppSize.s1.h,
+                          ),
+                          CustomButton(
+                            onPressd: () {
+                              ProfileCubit.get(context).updateUser(
+                                  _nameController.text,
+                                  _emailController.text,
+                                  _passwordController.text);
+                            },
+                            title: AppStrings.update,
+                          ),
+                          SizedBox(
+                            height: AppSize.s1.h,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                cubit.logout();
+                              },
+                              icon: const Icon(
+                                Icons.logout,
+                                color: Colors.black,
+                              ),
+                              label: Text(
+                                AppStrings.logout,
+                                textAlign: TextAlign.right,
+                                style: getRegularText(
+                                    color: Colors.grey, fontSize: AppSize.s16),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                                onPressed: () {
+                                  cubit.removeAccount();
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.black,
+                                ),
+                                label: Text(
+                                  AppStrings.removeAccount,
+                                  textAlign: TextAlign.right,
+                                  style: getRegularText(
+                                      color: Colors.grey,
+                                      fontSize: AppSize.s16),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                } else if (state is GetAccountLoading) {
+                  return const CustomLoading();
+                } else {
+                  return CustomErrorWidget(
+                      voidCallback: () =>
+                          ProfileCubit.get(context).getAccount());
+                }
+              },
+            ));
       },
     );
   }

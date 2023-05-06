@@ -27,3 +27,30 @@ class RemoveAccountFailed extends ProfileState {
 class RemoveAccountSuccessfully extends ProfileState {}
 
 class RemoveAccountLoading extends ProfileState {}
+
+// get account state
+
+class GetAccountFailed extends ProfileState {
+  final String errorMessage;
+
+  GetAccountFailed(this.errorMessage);
+}
+
+class GetAccountSuccessfully extends ProfileState {
+  ProfileModel profileModel;
+  GetAccountSuccessfully(this.profileModel);
+}
+
+class GetAccountLoading extends ProfileState {}
+
+// update profile
+
+class UpdateAccountFailed extends ProfileState {
+  final String errorMessage;
+
+  UpdateAccountFailed(this.errorMessage);
+}
+
+class UpdateAccountSuccessfully extends ProfileState {}
+
+class UpdateAccountLoading extends ProfileState {}
