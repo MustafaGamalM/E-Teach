@@ -1,8 +1,9 @@
-import 'package:e_teach/features/course/presentation/view/course_videos_view.dart';
 import 'package:e_teach/features/home/data/model/course_model.dart';
+import 'package:e_teach/features/home/data/model/room_mdel.dart';
 import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo.dart';
 import 'package:e_teach/features/home/presentation/view/home_view.dart';
+import 'package:e_teach/features/my_courses/presentation/view/course_videos_view.dart';
 import 'package:e_teach/features/profile/presentation/view/profile_view.dart';
 import 'package:e_teach/features/rooms/presentation/view/room_view.dart';
 
@@ -20,7 +21,7 @@ class MainCubit extends Cubit<MainState> {
 
   List<Widget> mainScreen = [
     const RoomView(),
-    const UserCoursesView(),
+    const MyCoursesView(),
     HomeView(),
     const ProfileView()
   ];
@@ -47,6 +48,19 @@ class MainCubit extends Cubit<MainState> {
       emit(GetCourseByIdFailed(failure.errMessage));
     }, (course) {
       emit(GetCourseByIdSuccessfully(course));
+    });
+  }
+
+  List<RoomData> roomsModel = [];
+  getRooms() async {
+    emit(GetRoomsLoading());
+    var res = await _homeRepo.getRooms();
+    res.fold((failure) {
+      emit(GetRoomsFailed(failure.errMessage));
+    }, (rooms) {
+      roomsModel = rooms.response!.data!;
+      print(roomsModel.length);
+      emit(GetRoomsSuccessfully(rooms));
     });
   }
 }

@@ -37,3 +37,18 @@ class GetCourseByIdSuccessfully extends MainState {
   final SingleCourseModel singleCourseModel;
   GetCourseByIdSuccessfully(this.singleCourseModel);
 }
+
+// get rooms
+
+class GetRoomsLoading extends MainState {}
+
+class GetRoomsFailed extends MainState {
+  final String errorMessage;
+
+  GetRoomsFailed(this.errorMessage);
+}
+
+class GetRoomsSuccessfully extends MainState {
+  final RoomModel roomModel;
+  GetRoomsSuccessfully(this.roomModel);
+}

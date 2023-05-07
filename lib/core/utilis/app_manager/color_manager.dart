@@ -14,4 +14,6 @@ class ColorManager {
   static Color yellow = const Color(0xffFFD141);
   static Color moveLight = const Color(0xff4900FF);
   static Color babyBlue = const Color(0xff27A6B9);
+  static Color move = const Color(0xFF687daf);
+  static Color darkBlue = const Color(0xFF264CD2);
 }

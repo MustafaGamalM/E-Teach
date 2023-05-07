@@ -13,9 +13,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   updateUser(String name, String email, String password) async {
     emit(UpdateAccountLoading());
-    var res = await _profileRepo.logout();
+    var res = await _profileRepo.updateAccount(name, email, password);
     res.fold((l) => emit(UpdateAccountFailed(l.errMessage)), (r) {
-      //  getAccount();
+      getAccount();
       emit(UpdateAccountSuccessfully());
     });
   }

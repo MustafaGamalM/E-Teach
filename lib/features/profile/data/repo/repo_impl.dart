@@ -84,7 +84,7 @@ class ProfileRepoImpl extends ProfileRepo {
       String name, String email, String password) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.get(
+      var res = await _apiService.pos(
           endPoint: AppConstatns.updateProfileEndPoint,
           data: {
             "token": token,
@@ -95,6 +95,8 @@ class ProfileRepoImpl extends ProfileRepo {
       UpdateProfileModel model = UpdateProfileModel.fromJson(res);
       return Right(model);
     } catch (e) {
+      print(e.toString());
+      print('ssss');
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {

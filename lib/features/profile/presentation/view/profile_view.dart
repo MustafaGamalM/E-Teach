@@ -85,6 +85,11 @@ class _ProfileViewState extends State<ProfileView> {
                     color: ColorManager.white, fontSize: AppSize.s14.sp),
                 textAlign: TextAlign.left,
               ),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Routes.settings);
+                  },
+                  icon: const Icon(Icons.settings)),
             ),
             body: BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
@@ -197,12 +202,12 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ),
                   );
-                } else if (state is GetAccountLoading) {
-                  return const CustomLoading();
-                } else {
+                } else if (state is GetAccountFailed) {
                   return CustomErrorWidget(
                       voidCallback: () =>
                           ProfileCubit.get(context).getAccount());
+                } else {
+                  return const CustomLoading();
                 }
               },
             ));

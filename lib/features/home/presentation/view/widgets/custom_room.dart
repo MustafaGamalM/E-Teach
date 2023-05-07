@@ -11,38 +11,36 @@ import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:e_teach/features/widgets/custom_room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-class CustomRoomsWidget extends StatefulWidget {
-  const CustomRoomsWidget({super.key});
-
-  @override
-  State<CustomRoomsWidget> createState() => _CustomRoomsWidgetState();
-}
-
-class _CustomRoomsWidgetState extends State<CustomRoomsWidget> {
-  @override
-  void initState() {
-    // BlocProvider.of<MainCubit>(context).getCourses();
-    super.initState();
-  }
-
+class CustomRoomsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 21.h,
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return const CustomRoonWidget();
-        },
-        separatorBuilder: (context, index) => SizedBox(
-          width: AppSize.s2.w,
-        ),
-      ),
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        var rooms = MainCubit.get(context).roomsModel;
+        if (rooms.isNotEmpty) {
+          return SizedBox(
+            height: 21.h,
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: rooms.length,
+              itemBuilder: (context, index) {
+                return CustomRoonWidget(
+                  roomId: rooms[index].id!,
+                  roomName: rooms[index].name!,
+                );
+              },
+              separatorBuilder: (context, index) => SizedBox(
+                width: AppSize.s2.w,
+              ),
+            ),
+          );
+        } else {
+          return const Center(child: CustomLoading());
+        }
+      },
     );
   }
 }

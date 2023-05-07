@@ -7,12 +7,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomRoonWidget extends StatelessWidget {
-  const CustomRoonWidget({super.key});
-
+  const CustomRoonWidget(
+      {super.key, required this.roomId, required this.roomName});
+  final int roomId;
+  final String roomName;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        print(roomId.toString());
+        print(roomName.toString());
+      },
       child: Container(
         width: AppSize.s18.h,
         height: AppSize.s18.h,
@@ -33,7 +38,7 @@ class CustomRoonWidget extends StatelessWidget {
             height: AppSize.s1.h,
           ),
           Text(
-            'Room Name',
+            roomName,
             style: getLightText(
                 color: ColorManager.grey, fontSize: AppSize.s10.sp),
             textAlign: TextAlign.center,

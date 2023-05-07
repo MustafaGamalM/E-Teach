@@ -48,4 +48,17 @@ class AppStrings {
   static const String courses = "Courses";
   static const String rooms = "Rooms";
   static const String removeAccount = "Remove account";
+  static const String noVideos = "Choose Video";
+  static const String addCuourseName = "Add course name";
+  static const String addCourse = "Add course";
+  static const String canSubmitVideo = "You can Upload video";
+  static const String uploadVideo = "Upload video";
+  static const String changeLanguage = "Change language";
+  static const String changeTheme = "Change Theme";
+  static const String dark = "Dark";
+  static const String light = "Light";
+  static const String contactUs = "Contact us";
+  static const String shareApp = "Share app";
+  static const String intviteFrineds = "invite";
+  static const String settings = "Settings";
 }

@@ -1,7 +1,9 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/search/presentation/viewmodel/cubit/search_cubit.dart';
+import 'package:e_teach/features/widgets/custom_error_view.dart';
 import 'package:e_teach/features/widgets/custom_gird_courses.dart';
+import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:e_teach/features/widgets/custom_search_textfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,17 +27,24 @@ class SearchView extends StatelessWidget {
                 CustomSearchWidget(
                   controller: searchController,
                   onChanged: (v) {
-                    print(v);
+                    SearchCubit.get(context)
+                        .serachCourse(searchController.text);
                   },
                 ),
                 SizedBox(
                   height: AppSize.s3.h,
                 ),
-                const Expanded(
-                  child: CustomGridCourses(
-                    itemCount: 20,
+                if (state is SearchSuccessfully)
+                  Expanded(
+                    child: CustomGridCourses(
+                      courses: state.searchModel.response!.data!,
+                    ),
                   ),
-                )
+                if (state is SearchFailed)
+                  CustomErrorWidget(
+                      voidCallback: () => SearchCubit.get(context)
+                          .serachCourse(searchController.text)),
+                if (state is SearchLoading) const CustomLoading()
               ],
             ),
           )),

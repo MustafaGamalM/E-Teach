@@ -1,11 +1,14 @@
 import 'package:chewie/chewie.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/widgets/custom_error_view.dart';
 import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -41,6 +44,7 @@ class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: BlocBuilder<MainCubit, MainState>(builder: (context, state) {
         videos = [];
         if (state is GetCourseByIdSuccessfully) {
@@ -50,39 +54,22 @@ class _CourseDetailsState extends State<CourseDetails> {
           });
 
           return Container(
-            decoration: BoxDecoration(color: ColorManager.babyBlue),
+            decoration: BoxDecoration(color: ColorManager.primary),
             child: Column(
               children: [
                 Container(
-                    padding:
-                        const EdgeInsets.only(top: 70, left: 30, right: 30),
+                    padding: const EdgeInsets.only(left: 30, right: 30),
                     width: MediaQuery.of(context).size.width,
-                    height: 320,
+                    height: 30.h,
                     child: (isVideoShowen == false)
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Icon(Icons.arrow_back_ios,
-                                        color: Colors.red),
-                                  ),
-                                  Expanded(child: Container()),
-                                  const Icon(Icons.info_outline,
-                                      size: 20, color: Colors.red),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                            ],
+                        ? Center(
+                            child: Text(
+                              AppStrings.noVideos,
+                              style: TextStyle(
+                                  color: ColorManager.white,
+                                  fontSize: AppSize.s24,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           )
                         : Column(
                             mainAxisSize: MainAxisSize.min,
@@ -212,17 +199,27 @@ class _CourseDetailsState extends State<CourseDetails> {
                   });
                 },
                 child: Container(
-                  height: 5.h,
-                  padding: EdgeInsets.only(left: 3.w, top: 1.h, bottom: 1.h),
-                  decoration: BoxDecoration(
-                      color: ColorManager.grey2,
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text(
-                    '${index + 1} -    ${videos[index].name!}',
-                    style:
-                        TextStyle(color: ColorManager.black, fontSize: 14.sp),
-                  ),
-                )),
+                    height: 8.h,
+                    margin: EdgeInsets.symmetric(horizontal: 3.w),
+                    padding: EdgeInsets.only(left: 3.w, top: 2.h, bottom: 2.h),
+                    decoration: BoxDecoration(
+                        color: ColorManager.grey2,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${index + 1} -    ${videos[index].name!}',
+                          style: TextStyle(
+                              color: ColorManager.black, fontSize: 14.sp),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              GallerySaver.saveVideo(videos[index].videos!);
+                            },
+                            icon: Icon(Icons.download))
+                      ],
+                    ))),
           );
         },
         separatorBuilder: (context, index) => SizedBox(

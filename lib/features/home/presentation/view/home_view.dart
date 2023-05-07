@@ -70,7 +70,7 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: AppSize.s1.h,
               ),
-              const CustomRoomsWidget()
+              CustomRoomsWidget()
             ]),
           ),
         )

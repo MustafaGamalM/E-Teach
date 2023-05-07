@@ -5,8 +5,12 @@ import 'package:e_teach/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
+import 'package:e_teach/features/my_courses/data/repo/my_course_repo_impl.dart';
+import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
+import 'package:e_teach/features/search/data/repo/search_impl.dart';
+import 'package:e_teach/features/search/presentation/viewmodel/cubit/search_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +60,34 @@ Future<void> initProfileModule() async {
     );
     instance.registerFactory<ProfileCubit>(
       () => ProfileCubit(instance()),
+    );
+  }
+}
+
+Future<void> initSearchModule() async {
+  if (!GetIt.I.isRegistered<SearchRepoImpl>()) {
+    instance.registerFactory<SearchRepoImpl>(
+      () => SearchRepoImpl(
+        instance.get<ApiService>(),
+        instance.get<AppReference>(),
+      ),
+    );
+    instance.registerFactory<SearchCubit>(
+      () => SearchCubit(instance()),
+    );
+  }
+}
+
+Future<void> initMyCoursesModule() async {
+  if (!GetIt.I.isRegistered<MyCoursesRepoImpl>()) {
+    instance.registerFactory<MyCoursesRepoImpl>(
+      () => MyCoursesRepoImpl(
+        instance.get<ApiService>(),
+        instance.get<AppReference>(),
+      ),
+    );
+    instance.registerFactory<MyCoursesCubit>(
+      () => MyCoursesCubit(instance()),
     );
   }
 }

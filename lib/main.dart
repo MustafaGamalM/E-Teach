@@ -1,4 +1,5 @@
 import 'package:e_teach/core/bloc_observer.dart';
+import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/theme_manager.dart';
 import 'package:e_teach/features/setting/presntation/viewmodel/cubit/settings_cubit.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
         providers: [
           //  BlocProvider(create: (context) => MainCubit()),
-          BlocProvider(create: (context) => SettingsCubit()),
+          BlocProvider(
+              create: (context) => SettingsCubit(instance<AppReference>())),
         ],
         child: MaterialApp(
           title: 'E-Teach',

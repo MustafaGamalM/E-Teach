@@ -27,4 +27,13 @@ class ApiService {
         queryParameters: query, data: data);
     return response.data;
   }
+
+  Future<Map<String, dynamic>> post2(
+      {required String endPoint,
+      Map<String, dynamic>? query,
+      required FormData data}) async {
+    var response = await _dio.post('$_baseUrl$endPoint',
+        queryParameters: query, data: data);
+    return response.data;
+  }
 }
