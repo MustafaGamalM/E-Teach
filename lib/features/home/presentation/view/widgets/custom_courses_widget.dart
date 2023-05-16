@@ -37,6 +37,7 @@ class _CustomCoursesWidgetState extends State<CustomCoursesWidget> {
               itemBuilder: (context, index) {
                 return CustomCourse(
                   courseName: state.courses.response!.data![index].name!,
+                  rate: state.courses.response!.data![index].feedback!.length,
                   onTap: () {
                     Navigator.pushNamed(context, Routes.courseDetails,
                         arguments: {

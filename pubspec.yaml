@@ -37,6 +37,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_rating_bar: ^4.0.1
   flutter_svg: ^1.1.6
   fluttertoast: ^8.2.1
   gallery_saver: ^2.3.2
@@ -51,6 +52,7 @@ dependencies:
   sizer: ^2.0.15
   url_launcher: ^6.1.10
   video_player: 
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
 

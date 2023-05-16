@@ -63,6 +63,8 @@ class AuthCubit extends Cubit<AuthState> {
     res.fold((failure) {
       emit(RegisterFailed(failure.errMessage));
     }, (succes) {
+      print(succes.response!.data!.type);
+      print('========');
       emit(RegisterSuccessfully(
           succes.response!.data!.name!, succes.response!.data!.email!));
       _appReference.setToken(succes.response!.data!.token!);

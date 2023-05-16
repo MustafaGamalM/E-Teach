@@ -21,6 +21,7 @@ class CustomGridCourses extends StatelessWidget {
       itemBuilder: (context, index) {
         return CustomCourse(
             courseName: courses[index].name!,
+            rate: 0,
             onTap: () {
               Navigator.pushNamed(context, Routes.courseDetails,
                   arguments: {"id": courses[index].id});

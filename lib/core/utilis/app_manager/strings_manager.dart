@@ -64,4 +64,5 @@ class AppStrings {
   static const String yourRoom = "Your rooms";
   static const String addRoom = "Add room";
   static const String yourRoomDesc = "Add your room description";
+  static const String supportInstructor = "Support instructor";
 }

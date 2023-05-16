@@ -185,10 +185,10 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                       ),
                     ),
                   ),
-                // if (state is MyCoursesFailed)
-                //   CustomErrorWidget(
-                //       voidCallback: () =>
-                //           MyCoursesCubit.get(context).getMyCourses()),
+                if (state is MyCoursesFailed)
+                  CustomErrorWidget(
+                      voidCallback: () =>
+                          MyCoursesCubit.get(context).getMyCourses()),
                 if (state is MyCoursesLoading) const CustomLoading(),
               ],
             );

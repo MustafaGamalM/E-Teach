@@ -17,6 +17,7 @@ import 'package:e_teach/features/my_courses/presentation/view/upload_course.dart
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:e_teach/features/onboarding/presntation/view/onboarding_view.dart';
 import 'package:e_teach/features/onboarding/presntation/viewmodel/cubit/on_boarding_cubit.dart';
+import 'package:e_teach/features/payment/presentation/view/payment_view.dart';
 import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
 import 'package:e_teach/features/rooms/data/repo/my_room_repo_impl.dart';
@@ -43,6 +44,7 @@ class Routes {
   static const String searchCourse = '/searchCourse';
   static const String uploadCourse = '/uploadCourse';
   static const String settings = '/settings';
+  static const String paymentView = "/PaymentView";
 }
 
 class RouteGenerator {
@@ -155,6 +157,13 @@ class RouteGenerator {
             ),
           );
         });
+
+      case Routes.paymentView:
+        return MaterialPageRoute(
+          builder: (context) {
+            return PaymentView();
+          },
+        );
 
       case Routes.settings:
         return MaterialPageRoute(

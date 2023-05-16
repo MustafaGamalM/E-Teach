@@ -1,5 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/home/data/model/single_course_model.dart';
@@ -44,7 +45,10 @@ class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          leading: BackButton(
+        color: ColorManager.white,
+      )),
       body: BlocBuilder<MainCubit, MainState>(builder: (context, state) {
         videos = [];
         if (state is GetCourseByIdSuccessfully) {
@@ -88,6 +92,34 @@ class _CourseDetailsState extends State<CourseDetails> {
                     children: [
                       const SizedBox(
                         height: 30,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 5.w, right: 5.w, bottom: 2.h),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(Routes.paymentView);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.monetization_on_rounded,
+                                color: ColorManager.black,
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(
+                                AppStrings.supportInstructor,
+                                style: TextStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 14.sp,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
