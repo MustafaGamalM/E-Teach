@@ -3,6 +3,7 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
+import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
 import 'package:e_teach/core/widgets/custom_popup.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
@@ -43,7 +44,7 @@ class _MyCoursesViewState extends State<MyCoursesView> {
           centerTitle: false,
         ),
         body: BlocConsumer<MyCoursesCubit, CourseState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is MyCoursesFailed) {
               customPopUp(context, isLoading: false, onPressed: () async {
                 Navigator.pop(context);
@@ -52,8 +53,9 @@ class _MyCoursesViewState extends State<MyCoursesView> {
               customPopUp(context,
                   isLoading: true, onPressed: () {}, title: 'Loading');
             } else if (state is CreateCourseSucess) {
-              Navigator.pop(context);
-              MyCoursesCubit.get(context).getMyCourses();
+              dismissDialog(context);
+              await MyCoursesCubit.get(context).getMyCourses();
+              dismissDialog(context);
             }
           },
           builder: (context, state) {
@@ -183,10 +185,10 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                       ),
                     ),
                   ),
-                if (state is MyCoursesFailed)
-                  CustomErrorWidget(
-                      voidCallback: () =>
-                          MyCoursesCubit.get(context).getMyCourses()),
+                // if (state is MyCoursesFailed)
+                //   CustomErrorWidget(
+                //       voidCallback: () =>
+                //           MyCoursesCubit.get(context).getMyCourses()),
                 if (state is MyCoursesLoading) const CustomLoading(),
               ],
             );

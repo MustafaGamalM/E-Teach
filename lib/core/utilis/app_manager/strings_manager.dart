@@ -61,4 +61,7 @@ class AppStrings {
   static const String shareApp = "Share app";
   static const String intviteFrineds = "invite";
   static const String settings = "Settings";
+  static const String yourRoom = "Your rooms";
+  static const String addRoom = "Add room";
+  static const String yourRoomDesc = "Add your room description";
 }

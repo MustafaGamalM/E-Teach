@@ -22,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepo _authRepo;
   final AppReference _appReference;
 
-  String userType = "Student";
+  String userType = "instructor";
   chageObsucre() {
     obsucre = !obsucre;
     eyeIcon = obsucre == true
@@ -59,7 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
   register(String email, String password, String type, String name) async {
     //  emit(RegisterLoading());
     emit(RegisterLoading());
-    var res = await _authRepo.register(email, name, password, type);
+    var res = await _authRepo.register(email, name, password, userType);
     res.fold((failure) {
       emit(RegisterFailed(failure.errMessage));
     }, (succes) {

@@ -57,6 +57,9 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
         return left(ServerFailure(res['Response']['msg']));
       }
     } catch (e) {
+      print('courseeeeeeeeeeeeeeeeeeeeee');
+      print(e.toString());
+      print('courseeeeeeeeeeeeeeeeeeeeee');
       if (e is DioError) {
         return left(
           ServerFailure.fromDioError(e),

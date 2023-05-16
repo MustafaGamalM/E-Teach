@@ -20,11 +20,11 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.primary,
-      appBar: AppBar(
-        primary: true,
-        leading: AvaterWidget(""),
-        title: Text('Mustafa Gamal'),
-      ),
+      // appBar: AppBar(
+      //   primary: true,
+      //   leading: AvaterWidget(""),
+      //   title: Text('Mustafa Gamal'),
+      // ),
       body: Column(children: [
         SizedBox(height: 6.h),
         Padding(

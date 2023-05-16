@@ -14,4 +14,7 @@ class AppConstatns {
   static const String myCoursesEndPoint = "get_my_courses";
   static const String createCourseEndPoint = "create_courses";
   static const String uploadCourseEndPoint = "upload_videos_course_id";
+
+  static const String myRoomEndPoint = "get_my_rooms";
+  static const String createMyRoomEndPoint = "create_room";
 }

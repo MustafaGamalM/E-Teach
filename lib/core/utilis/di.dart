@@ -9,6 +9,8 @@ import 'package:e_teach/features/my_courses/data/repo/my_course_repo_impl.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
+import 'package:e_teach/features/rooms/data/repo/my_room_repo_impl.dart';
+import 'package:e_teach/features/rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
 import 'package:e_teach/features/search/data/repo/search_impl.dart';
 import 'package:e_teach/features/search/presentation/viewmodel/cubit/search_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -88,6 +90,20 @@ Future<void> initMyCoursesModule() async {
     );
     instance.registerFactory<MyCoursesCubit>(
       () => MyCoursesCubit(instance()),
+    );
+  }
+}
+
+Future<void> initMyRoomModule() async {
+  if (!GetIt.I.isRegistered<MyRoomRepoImpl>()) {
+    instance.registerFactory<MyRoomRepoImpl>(
+      () => MyRoomRepoImpl(
+        instance.get<ApiService>(),
+        instance.get<AppReference>(),
+      ),
+    );
+    instance.registerFactory<MyRoomCubit>(
+      () => MyRoomCubit(instance()),
     );
   }
 }

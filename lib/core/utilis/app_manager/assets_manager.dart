@@ -22,6 +22,7 @@ class ImageAssets {
   static const String rightArrowIc = "$imagePath/right_arrow_ic.svg";
   static const String settingsIc = "$imagePath/settings_right_arrow_ic.svg";
   static const String whatsAppIc = "$imagePath/whatsapp.svg";
+  static const String onlineRoom2 = "$imagePath/online_room.svg";
 }
 
 class JsonAssets {

@@ -19,6 +19,8 @@ import 'package:e_teach/features/onboarding/presntation/view/onboarding_view.dar
 import 'package:e_teach/features/onboarding/presntation/viewmodel/cubit/on_boarding_cubit.dart';
 import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
+import 'package:e_teach/features/rooms/data/repo/my_room_repo_impl.dart';
+import 'package:e_teach/features/rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
 import 'package:e_teach/features/search/data/repo/search_impl.dart';
 import 'package:e_teach/features/search/presentation/view/search_view.dart';
 import 'package:e_teach/features/search/presentation/viewmodel/cubit/search_cubit.dart';
@@ -80,6 +82,7 @@ class RouteGenerator {
         initHomeModule();
         initProfileModule();
         initMyCoursesModule();
+        initMyRoomModule();
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
@@ -94,6 +97,10 @@ class RouteGenerator {
                         create: (context) =>
                             MyCoursesCubit(instance<MyCoursesRepoImpl>())
                               ..getMyCourses()),
+                    BlocProvider(
+                        create: (context) =>
+                            MyRoomCubit(instance<MyRoomRepoImpl>())
+                              ..getMyRooms()),
                   ],
                   child: const MainScreen(),
                 ));

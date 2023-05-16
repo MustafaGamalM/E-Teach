@@ -27,7 +27,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     // final url = 'https://wa.me/01123142082';
     // final Uri url =  Uri.parse('')
     String phone = "+201123142082";
-    Uri url2 = Uri.parse('https://api.whatsapp.com/send?phone=$phone');
+    Uri url2 = Uri.parse('https://wa.me/phone');
     //   await launchUrl(url2);
     if (await canLaunchUrl(url2)) {
       await launchUrl(url2);

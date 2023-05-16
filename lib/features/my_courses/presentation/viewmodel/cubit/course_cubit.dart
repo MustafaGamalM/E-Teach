@@ -18,8 +18,10 @@ class MyCoursesCubit extends Cubit<CourseState> {
     emit(MyCoursesLoading());
     var res = await _myCoursesRepo.getMyCourses();
     res.fold((failure) {
+      print('erorrrrrrrrr' + failure.errMessage);
       emit(MyCoursesFailed(failure.errMessage));
     }, (courses) {
+      print('doneeeeeeeeeeeeeeeeee');
       emit(MyCoursesSucess(courses));
     });
   }
@@ -28,6 +30,7 @@ class MyCoursesCubit extends Cubit<CourseState> {
     emit(CreateCourseLoading());
     var res = await _myCoursesRepo.createMyCourses(name);
     res.fold((failure) {
+      print('ffffffffffffffffffffffff' + failure.errMessage);
       emit(CreateCourseFailed(failure.errMessage));
     }, (data) {
       //getMyCourses();
