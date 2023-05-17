@@ -1,5 +1,6 @@
 import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +9,22 @@ import 'package:sizer/sizer.dart';
 
 class CustomRoonWidget extends StatelessWidget {
   const CustomRoonWidget(
-      {super.key, required this.roomId, required this.roomName});
+      {super.key,
+      required this.roomId,
+      required this.roomName,
+      required this.roomDesc});
   final int roomId;
   final String roomName;
+  final String roomDesc;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print(roomId.toString());
-        print(roomName.toString());
+        Navigator.pushNamed(context, Routes.roomDescView, arguments: {
+          "id": roomId,
+          "roomName": roomName,
+          "roomDesc": roomDesc
+        });
       },
       child: Container(
         width: AppSize.s18.h,

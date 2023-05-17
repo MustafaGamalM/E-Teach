@@ -27,6 +27,10 @@ class ImageAssets {
       "https://cdn-icons-png.flaticon.com/128/4090/4090458.png";
   static const String visaImage =
       "https://cdn-icons-png.flaticon.com/128/349/349221.png";
+
+  static const String onlineRoomView = "$imagePath/online_rooom.svg";
+  static const String card = "$imagePath/card.svg";
+  static const String bookApp = "$imagePath/book_app.svg";
 }
 
 class JsonAssets {

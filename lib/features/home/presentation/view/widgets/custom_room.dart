@@ -4,6 +4,7 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
+import 'package:e_teach/features/home/data/model/room_mdel.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/widgets/custom_course.dart';
 import 'package:e_teach/features/widgets/custom_error_view.dart';
@@ -18,7 +19,7 @@ class CustomRoomsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        var rooms = MainCubit.get(context).roomsModel;
+        List<RoomData> rooms = MainCubit.get(context).roomsModel;
         if (rooms.isNotEmpty) {
           return SizedBox(
             height: 21.h,
@@ -30,6 +31,7 @@ class CustomRoomsWidget extends StatelessWidget {
                 return CustomRoonWidget(
                   roomId: rooms[index].id!,
                   roomName: rooms[index].name!,
+                  roomDesc: rooms[index].description!,
                 );
               },
               separatorBuilder: (context, index) => SizedBox(

@@ -1,4 +1,5 @@
 import 'package:e_teach/features/home/data/model/course_model.dart';
+import 'package:e_teach/features/home/data/model/room_chat_model.dart';
 import 'package:e_teach/features/home/data/model/room_mdel.dart';
 import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo.dart';
@@ -61,6 +62,16 @@ class MainCubit extends Cubit<MainState> {
       roomsModel = rooms.response!.data!;
       print(roomsModel.length);
       emit(GetRoomsSuccessfully(rooms));
+    });
+  }
+
+  getRoomChat(int roomId) async {
+    emit(GetRoomChatLoading());
+    var res = await _homeRepo.getRoomChat(roomId);
+    res.fold((failure) {
+      emit(GetRoomChatFailed(failure.errMessage));
+    }, (rooModel) {
+      emit(GetRoomChatSuccessfully(rooModel));
     });
   }
 }

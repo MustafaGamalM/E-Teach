@@ -3,6 +3,7 @@ import 'package:flutter/animation.dart';
 class ColorManager {
   static Color white = const Color(0xffFEFEFE);
   static Color primary = const Color(0xff352D49);
+  static Color primaryLight = const Color(0xff352D49).withOpacity(.7);
   static Color cien = const Color(0xff1BC4B3);
 
   static Color red = const Color(0xffDD4B39);

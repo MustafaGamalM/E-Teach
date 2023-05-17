@@ -52,3 +52,17 @@ class GetRoomsSuccessfully extends MainState {
   final RoomModel roomModel;
   GetRoomsSuccessfully(this.roomModel);
 }
+
+// room chat
+class GetRoomChatLoading extends MainState {}
+
+class GetRoomChatFailed extends MainState {
+  final String errorMessage;
+
+  GetRoomChatFailed(this.errorMessage);
+}
+
+class GetRoomChatSuccessfully extends MainState {
+  final RoomChatModel roomChatModel;
+  GetRoomChatSuccessfully(this.roomChatModel);
+}

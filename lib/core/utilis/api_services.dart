@@ -4,8 +4,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class ApiService {
   final _baseUrl = 'https://eteach.albayan-eg.com/api/';
   final Dio _dio;
-
-  ApiService(this._dio);
+  ApiService(this._dio) {
+    // _dio.interceptors.add(InterceptorsWrapper(
+    //   onRequest: (options, handler) async {
+    //     options.headers['Authorization'] = "Bearer";
+    //   },
+    // ));
+  }
 
   Future<Map<String, dynamic>> get(
       {required String endPoint,

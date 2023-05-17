@@ -7,9 +7,10 @@ import 'package:e_teach/features/auth/presentation/view/register_view.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/auth/presentation/view/forget_password_view.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
-import 'package:e_teach/features/home/presentation/view/paly_course.dart';
+import 'package:e_teach/features/home/presentation/view/course/paly_course.dart';
+import 'package:e_teach/features/home/presentation/view/course/videos_course.dart';
 import 'package:e_teach/features/home/presentation/view/main_view.dart';
-import 'package:e_teach/features/home/presentation/view/videos_course.dart';
+import 'package:e_teach/features/home/presentation/view/room/room_view.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/data/repo/my_course_repo_impl.dart';
 import 'package:e_teach/features/my_courses/presentation/view/course_videos_view.dart';
@@ -45,6 +46,7 @@ class Routes {
   static const String uploadCourse = '/uploadCourse';
   static const String settings = '/settings';
   static const String paymentView = "/PaymentView";
+  static const String roomDescView = "/roomDescView";
 }
 
 class RouteGenerator {
@@ -171,7 +173,15 @@ class RouteGenerator {
                   create: (context) => SettingsCubit(instance<AppReference>()),
                   child: const SettingsView(),
                 ));
-
+      case Routes.roomDescView:
+        return MaterialPageRoute(builder: (_) {
+          var room = routeSettings.arguments as Map;
+          return RoomDesriptionView(
+            roomId: room['id'],
+            roomDesc: room['roomDesc'],
+            roomName: room['roomName'],
+          );
+        });
       default:
         return unDefinedRoute();
     }
