@@ -1,8 +1,6 @@
-import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
-import 'package:e_teach/features/rooms/data/model/my_room.dart';
-import 'package:e_teach/features/rooms/data/repo/my_room_repo.dart';
+import 'package:e_teach/features/my_rooms/data/model/my_room.dart';
+import 'package:e_teach/features/my_rooms/data/repo/my_room_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'my_room_state.dart';
 

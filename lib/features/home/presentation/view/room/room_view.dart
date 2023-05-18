@@ -1,5 +1,6 @@
 import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,12 @@ class RoomDesriptionView extends StatelessWidget {
           ),
           actions: [
             BlocListener<MainCubit, MainState>(
-              listener: (context, state) {},
+              listener: (context, state) {
+                if (state is GetRoomChatSuccessfully) {
+                  Navigator.of(context).pushNamed(Routes.roomChatView,
+                      arguments: {"id": roomId});
+                }
+              },
               child: IconButton(
                   onPressed: () {
                     MainCubit.get(context).getRoomChat(roomId);

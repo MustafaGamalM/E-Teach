@@ -10,19 +10,20 @@ import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/view/course/paly_course.dart';
 import 'package:e_teach/features/home/presentation/view/course/videos_course.dart';
 import 'package:e_teach/features/home/presentation/view/main_view.dart';
+import 'package:e_teach/features/home/presentation/view/room/room_chat_view.dart';
 import 'package:e_teach/features/home/presentation/view/room/room_view.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/data/repo/my_course_repo_impl.dart';
 import 'package:e_teach/features/my_courses/presentation/view/course_videos_view.dart';
 import 'package:e_teach/features/my_courses/presentation/view/upload_course.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
+import 'package:e_teach/features/my_rooms/data/repo/my_room_repo_impl.dart';
+import 'package:e_teach/features/my_rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
 import 'package:e_teach/features/onboarding/presntation/view/onboarding_view.dart';
 import 'package:e_teach/features/onboarding/presntation/viewmodel/cubit/on_boarding_cubit.dart';
 import 'package:e_teach/features/payment/presentation/view/payment_view.dart';
 import 'package:e_teach/features/profile/data/repo/repo_impl.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
-import 'package:e_teach/features/rooms/data/repo/my_room_repo_impl.dart';
-import 'package:e_teach/features/rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
 import 'package:e_teach/features/search/data/repo/search_impl.dart';
 import 'package:e_teach/features/search/presentation/view/search_view.dart';
 import 'package:e_teach/features/search/presentation/viewmodel/cubit/search_cubit.dart';
@@ -47,6 +48,7 @@ class Routes {
   static const String settings = '/settings';
   static const String paymentView = "/PaymentView";
   static const String roomDescView = "/roomDescView";
+  static const String roomChatView = "/roomChatView";
 }
 
 class RouteGenerator {
@@ -181,6 +183,11 @@ class RouteGenerator {
             roomDesc: room['roomDesc'],
             roomName: room['roomName'],
           );
+        });
+      case Routes.roomChatView:
+        return MaterialPageRoute(builder: (_) {
+          var room = routeSettings.arguments as Map;
+          return RoomChatView(roomId: room['id']);
         });
       default:
         return unDefinedRoute();

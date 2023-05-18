@@ -1,6 +1,5 @@
 part of 'my_room_cubit.dart';
 
-@immutable
 abstract class MyRoomState {}
 
 class MyRoomInitial extends MyRoomState {}

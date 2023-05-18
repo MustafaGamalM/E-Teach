@@ -5,8 +5,8 @@ import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo.dart';
 import 'package:e_teach/features/home/presentation/view/home_view.dart';
 import 'package:e_teach/features/my_courses/presentation/view/course_videos_view.dart';
+import 'package:e_teach/features/my_rooms/presentation/view/my_room_view.dart';
 import 'package:e_teach/features/profile/presentation/view/profile_view.dart';
-import 'package:e_teach/features/rooms/presentation/view/my_room_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

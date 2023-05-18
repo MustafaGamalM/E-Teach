@@ -1,8 +1,7 @@
 import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
 import 'package:e_teach/core/widgets/custom_popup.dart';
-import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
-import 'package:e_teach/features/rooms/presentation/view/custom_my_room.dart';
-import 'package:e_teach/features/rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
+import 'package:e_teach/features/my_rooms/presentation/view/custom_my_room.dart';
+import 'package:e_teach/features/my_rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
