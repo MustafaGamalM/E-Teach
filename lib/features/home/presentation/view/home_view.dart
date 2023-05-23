@@ -54,12 +54,12 @@ class HomeView extends StatelessWidget {
                     topRight: Radius.circular(AppSize.s4.h)),
                 color: ColorManager.white),
             child: ListView(physics: const BouncingScrollPhysics(), children: [
-              CustomRowWidget(AppStrings.courses, () {
-                return print('click');
-              }),
-              SizedBox(
-                height: 4.h,
-              ),
+              // CustomRowWidget(AppStrings.courses, () {
+              //   return print('click');
+              // }),
+              // SizedBox(
+              //   height: 4.h,
+              // ),
               const CustomCoursesWidget(),
               SizedBox(
                 height: AppSize.s1.h,

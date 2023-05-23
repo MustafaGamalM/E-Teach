@@ -18,6 +18,7 @@ class AppConstatns {
   static const String myRoomEndPoint = "get_my_rooms";
   static const String createMyRoomEndPoint = "create_room";
   static const String roomChatId = "join_to_room";
+  static const String refreshToken = "refresh";
   // PAY MOB ===============================
   static const String baseUrl = "https://accept.paymob.com/api/";
   static const String authEndPoint = "auth/tokens";

@@ -21,8 +21,8 @@ GetIt instance = GetIt.instance;
 Future<void> initModule() async {
   final shared = await SharedPreferences.getInstance();
   instance.registerLazySingleton<SharedPreferences>(() => shared);
-  instance.registerSingleton<ApiService>(ApiService(Dio()));
   instance.registerLazySingleton<AppReference>(() => AppReference(instance()));
+  instance.registerSingleton<ApiService>(ApiService(Dio(), instance()));
 }
 
 Future<void> initAuthModule() async {

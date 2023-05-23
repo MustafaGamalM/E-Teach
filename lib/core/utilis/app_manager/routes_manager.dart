@@ -6,8 +6,10 @@ import 'package:e_teach/features/auth/presentation/view/login_view.dart';
 import 'package:e_teach/features/auth/presentation/view/register_view.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/auth/presentation/view/forget_password_view.dart';
+import 'package:e_teach/features/home/data/model/course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/view/course/paly_course.dart';
+import 'package:e_teach/features/home/presentation/view/course/see_all_courses.dart';
 import 'package:e_teach/features/home/presentation/view/course/videos_course.dart';
 import 'package:e_teach/features/home/presentation/view/main_view.dart';
 import 'package:e_teach/features/home/presentation/view/room/room_chat_view.dart';
@@ -49,6 +51,7 @@ class Routes {
   static const String paymentView = "/PaymentView";
   static const String roomDescView = "/roomDescView";
   static const String roomChatView = "/roomChatView";
+  static const String sellAllCoursesView = "/sellAllCoursesView";
 }
 
 class RouteGenerator {
@@ -189,6 +192,15 @@ class RouteGenerator {
           var room = routeSettings.arguments as Map;
           return RoomChatView(roomId: room['id']);
         });
+
+      case Routes.sellAllCoursesView:
+        return MaterialPageRoute(builder: (_) {
+          var courseModelMap = routeSettings.arguments as Map;
+          return SellAllCoursesView(
+            courseModel: courseModelMap['courseModel'],
+          );
+        });
+
       default:
         return unDefinedRoute();
     }
