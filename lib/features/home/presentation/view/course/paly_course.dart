@@ -247,7 +247,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                         ),
                         IconButton(
                             onPressed: () {
-                              GallerySaver.saveVideo(videos[index].videos!);
+                              GallerySaver.saveVideo(
+                                videos[index].videos!,
+                              );
                             },
                             icon: Icon(Icons.download))
                       ],

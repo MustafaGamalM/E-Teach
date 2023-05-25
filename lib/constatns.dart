@@ -1,6 +1,8 @@
 class AppConstatns {
   static const String appLink =
       "Hello  , i am mustafa owener of this app share this app from my webstie https://mustafagamalm.com";
+  static const baseUrlApi = 'https://eteach.albayan-eg.com/api/';
+
   static const loginEndPoint = "login";
   static const registerEndPoint = "register";
   static const removeUserEndPoint = "remove_user";

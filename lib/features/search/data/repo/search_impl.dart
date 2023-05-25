@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/features/search/data/model/search_model.dart';
 import 'package:e_teach/features/search/data/repo/search_repo.dart';

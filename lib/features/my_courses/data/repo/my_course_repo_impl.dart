@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/features/my_courses/data/model/add_course.dart';
 import 'package:e_teach/features/my_courses/data/model/my_courses_model.dart';

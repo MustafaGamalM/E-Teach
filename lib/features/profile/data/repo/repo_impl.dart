@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/features/profile/data/data/myprofile_model.dart';
 import 'package:e_teach/features/profile/data/data/profile_model.dart';
@@ -60,6 +60,7 @@ class ProfileRepoImpl extends ProfileRepo {
 
   @override
   Future<Either<Failure, ProfileModel>> getAccount() async {
+    print('ccccccccccccL');
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.get(

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
+import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/features/my_courses/data/model/add_course.dart';
 import 'package:e_teach/features/my_courses/data/model/my_courses_model.dart';
 import 'package:e_teach/features/my_courses/data/model/upload_video.dart';
@@ -13,7 +15,6 @@ class MyCoursesCubit extends Cubit<CourseState> {
   MyCoursesCubit(this._myCoursesRepo) : super(CourseInitial());
   final MyCoursesRepo _myCoursesRepo;
   static MyCoursesCubit get(context) => BlocProvider.of(context);
-
   getMyCourses() async {
     emit(MyCoursesLoading());
     var res = await _myCoursesRepo.getMyCourses();
@@ -30,10 +31,8 @@ class MyCoursesCubit extends Cubit<CourseState> {
     emit(CreateCourseLoading());
     var res = await _myCoursesRepo.createMyCourses(name);
     res.fold((failure) {
-      print('ffffffffffffffffffffffff' + failure.errMessage);
       emit(CreateCourseFailed(failure.errMessage));
     }, (data) {
-      //getMyCourses();
       emit(CreateCourseSucess(data));
     });
   }
@@ -42,9 +41,17 @@ class MyCoursesCubit extends Cubit<CourseState> {
     emit(UploadCourseLoading());
     var res = await _myCoursesRepo.uploadMyCourse(formData);
     res.fold((failure) {
+      print(failure.errMessage);
       emit(UploadCourseFailed(failure.errMessage));
     }, (data) {
       emit(UploadCourseSucess(data));
     });
+  }
+
+  int fullProg = 0;
+  void updateProgress() {
+    //print(fullProg);
+    // change fullProg withb progress
+    emit(ProgressChanged());
   }
 }

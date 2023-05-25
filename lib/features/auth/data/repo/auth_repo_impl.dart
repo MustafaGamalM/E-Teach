@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/features/auth/data/model/login_model.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
 import 'package:dartz/dartz.dart';

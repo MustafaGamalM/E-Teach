@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';

@@ -50,3 +50,5 @@ class UploadCourseSucess extends CourseState {
 
   UploadCourseSucess(this.uploadVideoModel);
 }
+
+class ProgressChanged extends CourseState {}

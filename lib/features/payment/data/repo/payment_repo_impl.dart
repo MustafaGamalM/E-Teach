@@ -2,8 +2,8 @@ import 'package:dio/src/response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
-import 'package:e_teach/core/utilis/functions/api_service2.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_service2.dart';
 import 'package:e_teach/features/payment/data/repo/payment_repo.dart';
 
 class PaymentRepoImpl extends PaymentRepo {

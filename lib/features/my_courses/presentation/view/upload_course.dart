@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
@@ -68,6 +69,7 @@ class _UploadCourseState extends State<UploadCourse> {
           // TODO: implement listener
         },
         builder: (context, state) {
+          var cubit = MyCoursesCubit.get(context);
           return Padding(
             padding:
                 EdgeInsets.only(top: 10.h, left: 7.w, right: 7.w, bottom: 5.h),
@@ -133,7 +135,7 @@ class _UploadCourseState extends State<UploadCourse> {
                     height: 4.h,
                     width: double.infinity,
                     child: LiquidLinearProgressIndicator(
-                      value: .9,
+                      value: (cubit.fullProg) / 100,
                       valueColor: AlwaysStoppedAnimation(
                         ColorManager.babyBlue,
                       ),

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
-import 'package:e_teach/core/utilis/api_services.dart';
+import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/constants_manager.dart';
 import 'package:e_teach/features/home/data/model/course_model.dart';
