@@ -5,6 +5,7 @@ import 'package:e_teach/features/widgets/custom_course.dart';
 import 'package:e_teach/features/widgets/custom_error_view.dart';
 import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:e_teach/features/widgets/custom_row_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -33,7 +34,7 @@ class _CustomCoursesWidgetState extends State<CustomCoursesWidget> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustomRowWidget(AppStrings.courses, () {
+              CustomRowWidget(AppStrings.courses.tr(), () {
                 Navigator.pushNamed(context, Routes.sellAllCoursesView,
                     arguments: {"courseModel": state.courses});
               }),

@@ -1,7 +1,8 @@
 import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
-import 'package:e_teach/core/widgets/custom_popup.dart';
+import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/my_rooms/presentation/view/custom_my_room.dart';
 import 'package:e_teach/features/my_rooms/presentation/viewmodel/cubit/my_room_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
@@ -36,7 +37,7 @@ class _MyRoomViewState extends State<MyRoomView> {
         backgroundColor: ColorManager.white,
         appBar: AppBar(
           title: Text(
-            AppStrings.yourRoom,
+            AppStrings.yourRoom.tr(),
             style: getSemiBoldText(
                 color: ColorManager.white, fontSize: AppSize.s10.sp),
           ),
@@ -55,7 +56,9 @@ class _MyRoomViewState extends State<MyRoomView> {
                   } else if (state is GetMyRoomsStateLoading) {
                     dismissDialog(context);
                     customPopUp(context,
-                        isLoading: true, onPressed: () {}, title: 'Loading');
+                        isLoading: true,
+                        onPressed: () {},
+                        title: AppStrings.loading.tr());
                   } else if (state is CreateMyRoomsStateSuccess) {
                     //  dismissDialog(context);
                     await MyRoomCubit.get(context).getMyRooms();
@@ -80,13 +83,13 @@ class _MyRoomViewState extends State<MyRoomView> {
                                 controller: _roomNameTextController,
                                 validator: (name) {
                                   if (name!.isEmpty) {
-                                    return AppStrings.addCuourseName;
+                                    return AppStrings.addCuourseName.tr();
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
                                     fillColor: ColorManager.red,
-                                    hintText: AppStrings.addRoom,
+                                    hintText: AppStrings.addRoom.tr(),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
                                             AppSize.s10))),
@@ -103,7 +106,7 @@ class _MyRoomViewState extends State<MyRoomView> {
                                     }
                                   },
                                   child: Text(
-                                    AppStrings.addRoom,
+                                    AppStrings.addRoom.tr(),
                                     style: getMediumText(
                                         color: ColorManager.darkBlue,
                                         fontSize: 10.sp),
@@ -120,13 +123,13 @@ class _MyRoomViewState extends State<MyRoomView> {
                             minLines: 4,
                             validator: (name) {
                               if (name!.isEmpty) {
-                                return AppStrings.addRoom;
+                                return AppStrings.addRoom.tr();
                               }
                               return null;
                             },
                             decoration: InputDecoration(
                                 //  fillColor: ColorManager.red,
-                                hintText: AppStrings.yourRoomDesc,
+                                hintText: AppStrings.yourRoomDesc.tr(),
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(AppSize.s10))),
@@ -136,7 +139,7 @@ class _MyRoomViewState extends State<MyRoomView> {
                           padding: EdgeInsets.only(
                               left: 3.w, right: 3.w, top: 2.h, bottom: 3.h),
                           child: Text(
-                            AppStrings.yourRoom,
+                            AppStrings.yourRoom.tr(),
                             style: TextStyle(
                                 fontSize: 15.sp, color: ColorManager.black),
                             textAlign: TextAlign.left,

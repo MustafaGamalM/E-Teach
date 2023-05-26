@@ -9,6 +9,7 @@ import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,7 +79,7 @@ class _UploadCourseState extends State<UploadCourse> {
               child: Column(
                 children: [
                   Text(
-                    AppStrings.canSubmitVideo,
+                    AppStrings.canSubmitVideo.tr(),
                     style:
                         getBoldText(color: ColorManager.black, fontSize: 18.sp),
                   ),
@@ -95,11 +96,11 @@ class _UploadCourseState extends State<UploadCourse> {
                       child: CustomAuthFormFiled(
                         controller: _videoTextController,
                         keyboardType: TextInputType.emailAddress,
-                        hintText: AppStrings.courseName,
-                        labelText: AppStrings.courseName,
+                        hintText: AppStrings.courseName.tr(),
+                        labelText: AppStrings.courseName.tr(),
                         validator: (e) {
                           if (e!.isEmpty) {
-                            return AppStrings.courseName;
+                            return AppStrings.courseName.tr();
                           }
                         },
                       )),
@@ -122,7 +123,7 @@ class _UploadCourseState extends State<UploadCourse> {
                         }
                       },
                       label: Text(
-                        AppStrings.uploadVideo,
+                        AppStrings.uploadVideo.tr(),
                         style: getMediumText(
                             color: ColorManager.black, fontSize: 10.sp),
                       ),
@@ -146,7 +147,7 @@ class _UploadCourseState extends State<UploadCourse> {
                       borderRadius: 12.0,
                       direction: Axis
                           .horizontal, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.
-                      center: Text("Loading..."),
+                      center: Text(AppStrings.loading.tr()),
                     ),
                   )
                 ],

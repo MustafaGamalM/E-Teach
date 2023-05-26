@@ -5,6 +5,7 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/features/onboarding/presntation/viewmodel/cubit/on_boarding_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,10 @@ class OnBoardingScreen extends StatelessWidget {
   final PageController _pageController = PageController();
 
   final List<UserBoardingView> _onBoardingPage = [
-    UserBoardingView(AppStrings.student, ImageAssets.studentBoarding,
-        AppStrings.studentDescrition),
-    UserBoardingView(AppStrings.instructor, ImageAssets.studentBoarding,
-        AppStrings.instructorDescrition),
+    UserBoardingView(AppStrings.student.tr(), ImageAssets.studentBoarding,
+        AppStrings.studentDescrition.tr()),
+    UserBoardingView(AppStrings.instructor.tr(), ImageAssets.studentBoarding,
+        AppStrings.instructorDescrition.tr()),
   ];
 
   @override
@@ -46,7 +47,7 @@ class OnBoardingScreen extends StatelessWidget {
                           context, Routes.loginRoute);
                       appReference.onBoardingViewed();
                     },
-                    child: Text(AppStrings.skip),
+                    child: Text(AppStrings.skip.tr()),
                   ),
                 ),
                 SizedBox(

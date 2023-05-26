@@ -35,9 +35,11 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   dartz: ^0.10.1
   dio: ^5.0.1
+  easy_localization: ^3.0.2
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_phoenix: ^1.1.1
   flutter_rating_bar: ^4.0.1
   flutter_svg: ^1.1.6
   fluttertoast: ^8.2.1
@@ -80,6 +82,8 @@ flutter:
   assets:
     - assets/json/
     - assets/images/
+    - assets/translations/ar-EG.json
+    - assets/translations/en-US.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

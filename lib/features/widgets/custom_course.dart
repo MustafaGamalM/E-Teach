@@ -32,7 +32,7 @@ class CustomCourse extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s24),
             color: ColorManager.cien),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Align(
               alignment: Alignment.center,
@@ -41,8 +41,12 @@ class CustomCourse extends StatelessWidget {
                 height: AppSize.s10.h,
               ),
             ),
+            SizedBox(
+              height: 1.h,
+            ),
             Text(
-              AppStrings.courseName + courseName,
+              courseName,
+              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
               style: getMediumText(

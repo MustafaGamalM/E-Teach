@@ -43,8 +43,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   login(String email, String password) async {
-    print(email);
-    print(password);
     emit(LoginLoading());
     var res = await _authRepo.login(email, password);
     res.fold((failure) {
@@ -57,14 +55,11 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   register(String email, String password, String type, String name) async {
-    //  emit(RegisterLoading());
     emit(RegisterLoading());
-    var res = await _authRepo.register(email, name, password, userType);
+    var res = await _authRepo.register(email, name, password, "instructor");
     res.fold((failure) {
       emit(RegisterFailed(failure.errMessage));
     }, (succes) {
-      print(succes.response!.data!.type);
-      print('========');
       emit(RegisterSuccessfully(
           succes.response!.data!.name!, succes.response!.data!.email!));
       _appReference.setToken(succes.response!.data!.token!);

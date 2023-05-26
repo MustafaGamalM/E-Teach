@@ -3,11 +3,12 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
-import 'package:e_teach/core/widgets/custom_popup.dart';
+import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/widgets/custom_button.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:e_teach/features/widgets/toast_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -40,7 +41,9 @@ class RegistertionScreen extends StatelessWidget {
               title: 'Error');
         } else if (state is RegisterLoading) {
           customPopUp(context,
-              isLoading: true, onPressed: () {}, title: 'Loading');
+              isLoading: true,
+              onPressed: () {},
+              title: AppStrings.loading.tr());
         }
       },
       builder: (context, state) {
@@ -68,7 +71,7 @@ class RegistertionScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.addDetailsSignUp,
+                          AppStrings.addDetailsSignUp.tr(),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
@@ -78,10 +81,10 @@ class RegistertionScreen extends StatelessWidget {
                       CustomAuthFormFiled(
                         controller: nameController,
                         keyboardType: TextInputType.emailAddress,
-                        labelText: AppStrings.name,
+                        labelText: AppStrings.name.tr(),
                         validator: (v) {
                           if (v!.isEmpty) {
-                            return AppStrings.pleaseEnterName;
+                            return AppStrings.pleaseEnterName.tr();
                           }
                           return null;
                         },
@@ -92,10 +95,10 @@ class RegistertionScreen extends StatelessWidget {
                       CustomAuthFormFiled(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        labelText: AppStrings.email,
+                        labelText: AppStrings.email.tr(),
                         validator: (v) {
                           if (v!.isEmpty) {
-                            return AppStrings.pleaseEnterEmail;
+                            return AppStrings.pleaseEnterEmail.tr();
                           }
                           return null;
                         },
@@ -106,11 +109,11 @@ class RegistertionScreen extends StatelessWidget {
                       CustomAuthFormFiled(
                           controller: passwordController,
                           keyboardType: TextInputType.emailAddress,
-                          labelText: AppStrings.password,
+                          labelText: AppStrings.password.tr(),
                           obscureText: cubit.obsucre,
                           validator: (v) {
                             if (v!.isEmpty) {
-                              return AppStrings.pleaseEnterPassword;
+                              return AppStrings.pleaseEnterPassword.tr();
                             }
                             return null;
                           },
@@ -131,7 +134,7 @@ class RegistertionScreen extends StatelessWidget {
                                   selectedTileColor: ColorManager.black,
                                   activeColor: ColorManager.black,
                                   value: AppStrings.student,
-                                  title: Text(AppStrings.student,
+                                  title: Text(AppStrings.student.tr(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelSmall
@@ -144,7 +147,7 @@ class RegistertionScreen extends StatelessWidget {
                               child: RadioListTile(
                                   selectedTileColor: ColorManager.black,
                                   activeColor: ColorManager.black,
-                                  value: AppStrings.instructor,
+                                  value: AppStrings.instructor.tr(),
                                   title: const Text(AppStrings.instructor),
                                   groupValue: cubit.userType,
                                   onChanged: (value) {
@@ -156,7 +159,7 @@ class RegistertionScreen extends StatelessWidget {
                         height: 1.h,
                       ),
                       CustomButton(
-                          title: AppStrings.signUp,
+                          title: AppStrings.signUp.tr(),
                           onPressd: () {
                             if (_formKey.currentState!.validate()) {
                               cubit.register(
@@ -173,7 +176,7 @@ class RegistertionScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            AppStrings.alreadyHaveAnAccount,
+                            AppStrings.alreadyHaveAnAccount.tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -185,7 +188,7 @@ class RegistertionScreen extends StatelessWidget {
                                     .pushReplacementNamed(Routes.loginRoute);
                               },
                               child: Text(
-                                AppStrings.login,
+                                AppStrings.login.tr(),
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ))
                         ],

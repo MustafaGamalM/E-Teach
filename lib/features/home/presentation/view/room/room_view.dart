@@ -3,6 +3,7 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,7 +74,7 @@ class RoomDesriptionView extends StatelessWidget {
                   width: 1.w,
                 ),
                 Text(
-                  AppStrings.description,
+                  AppStrings.description.tr(),
                   maxLines: 2,
                   style: TextStyle(
                     color: ColorManager.red,

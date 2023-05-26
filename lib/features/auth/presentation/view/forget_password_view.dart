@@ -1,5 +1,6 @@
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -25,14 +26,14 @@ class ForgetPasswordScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(AppStrings.resetPassword),
+                Text(AppStrings.resetPassword.tr()),
                 SizedBox(height: 2.h),
-                Text(AppStrings.enterAndReceiveEmail),
+                Text(AppStrings.enterAndReceiveEmail.tr()),
                 SizedBox(height: 2.h),
                 CustomAuthFormFiled(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  labelText: AppStrings.email,
+                  labelText: AppStrings.email.tr(),
                 ),
                 SizedBox(height: 3.h),
                 SizedBox(
@@ -42,7 +43,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     onPressed: () async {
                       (_emailController.text.isNotEmpty)
                           ? () {}
-                          : showToast(AppStrings.addYourDetails);
+                          : showToast(AppStrings.addYourDetails.tr());
                     },
                     child: Text(AppStrings.send,
                         style: Theme.of(context)

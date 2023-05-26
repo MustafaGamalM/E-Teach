@@ -60,7 +60,6 @@ class ProfileRepoImpl extends ProfileRepo {
 
   @override
   Future<Either<Failure, ProfileModel>> getAccount() async {
-    print('ccccccccccccL');
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.get(

@@ -5,6 +5,7 @@ import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/features/home/data/model/course_model.dart';
 import 'package:e_teach/features/widgets/custom_course.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,7 +18,7 @@ class SellAllRoomsView extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            AppStrings.courses,
+            AppStrings.courses.tr(),
             style: getSemiBoldText(
                 color: ColorManager.white, fontSize: AppSize.s10.sp),
           ),

@@ -7,6 +7,7 @@ import 'package:e_teach/features/home/data/model/single_course_model.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/widgets/custom_error_view.dart';
 import 'package:e_teach/features/widgets/custom_loading.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -68,7 +69,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     child: (isVideoShowen == false)
                         ? Center(
                             child: Text(
-                              AppStrings.noVideos,
+                              AppStrings.noVideos.tr(),
                               style: TextStyle(
                                   color: ColorManager.white,
                                   fontSize: AppSize.s24,
@@ -111,7 +112,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 width: 2.w,
                               ),
                               Text(
-                                AppStrings.supportInstructor,
+                                AppStrings.supportInstructor.tr(),
                                 style: TextStyle(
                                   color: ColorManager.black,
                                   fontSize: 14.sp,
@@ -181,9 +182,9 @@ class _CourseDetailsState extends State<CourseDetails> {
             controller: chewieController!,
           ));
     } else {
-      return const AspectRatio(
+      return AspectRatio(
         aspectRatio: 16 / 9,
-        child: Center(child: Text('Loading....')),
+        child: Center(child: Text(AppStrings.loading.tr())),
       );
     }
   }

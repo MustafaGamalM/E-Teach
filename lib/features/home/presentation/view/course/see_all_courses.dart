@@ -7,6 +7,7 @@ import 'package:e_teach/features/home/data/model/course_model.dart';
 import 'package:e_teach/features/search/data/model/search_model.dart';
 import 'package:e_teach/features/widgets/custom_course.dart';
 import 'package:e_teach/features/widgets/custom_gird_courses.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,7 +20,7 @@ class SellAllCoursesView extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            AppStrings.courses,
+            AppStrings.courses.tr(),
             style: getSemiBoldText(
                 color: ColorManager.white, fontSize: AppSize.s10.sp),
           ),

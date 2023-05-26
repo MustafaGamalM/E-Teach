@@ -15,36 +15,32 @@ Future<void> customPopUp(BuildContext context,
   dismissDialog(context);
   return showDialog<void>(
     context: context,
-    barrierDismissible: false, // user must tap button!
+    barrierDismissible: isLoading ? false : true, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium,
+          errorMsg,
+          maxLines: 2,
+          style: TextStyle(
+              color: ColorManager.black,
+              fontSize: 14.sp,
+              overflow: TextOverflow.ellipsis),
         ),
-        content: SingleChildScrollView(
-          child: Text(errorMsg),
-        ),
+        content: LottieBuilder.asset(
+            height: isLoading ? AppSize.s10.h : AppSize.s17.h,
+            width: isLoading ? AppSize.s10.h : AppSize.s17.h,
+            isLoading ? JsonAssets.cricleLoading : JsonAssets.error),
         actions: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              height: AppSize.s140,
-              width: AppSize.s140,
-              child: LottieBuilder.asset(
-                  height: AppSize.s18.h,
-                  width: AppSize.s18.h,
-                  isLoading ? JsonAssets.cricleLoading : JsonAssets.error),
-            ),
-          ),
           if (!isLoading)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MaterialButton(
                   color: ColorManager.yellow,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.h)),
                   child: Text(AppStrings.close,
-                      style: Theme.of(context).textTheme.bodyLarge),
+                      style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -52,8 +48,10 @@ Future<void> customPopUp(BuildContext context,
                 MaterialButton(
                   color: ColorManager.yellow,
                   onPressed: onPressed,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.h)),
                   child: Text(AppStrings.retryAgain,
-                      style: Theme.of(context).textTheme.bodyLarge),
+                      style: Theme.of(context).textTheme.bodyMedium),
                 ),
               ],
             )

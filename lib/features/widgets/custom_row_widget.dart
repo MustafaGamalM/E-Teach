@@ -1,4 +1,5 @@
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomRowWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class CustomRowWidget extends StatelessWidget {
         Text(title),
         const Spacer(),
         TextButton(
-          child: Text(AppStrings.seeMore),
+          child: Text(AppStrings.seeMore.tr()),
           onPressed: onpressed,
         )
       ],

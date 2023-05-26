@@ -4,12 +4,13 @@ import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
-import 'package:e_teach/core/widgets/custom_popup.dart';
+import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:e_teach/features/widgets/custom_error_view.dart';
 import 'package:e_teach/features/widgets/custom_loading.dart';
 import 'package:e_teach/features/widgets/custom_search_textfiled.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -37,7 +38,7 @@ class _MyCoursesViewState extends State<MyCoursesView> {
         backgroundColor: ColorManager.white,
         appBar: AppBar(
           title: Text(
-            AppStrings.yourLearining,
+            AppStrings.yourLearining.tr(),
             style: getSemiBoldText(
                 color: ColorManager.white, fontSize: AppSize.s10.sp),
           ),
@@ -51,7 +52,9 @@ class _MyCoursesViewState extends State<MyCoursesView> {
               }, errorMsg: state.message, title: 'Error');
             } else if (state is MyCoursesLoading) {
               customPopUp(context,
-                  isLoading: true, onPressed: () {}, title: 'Loading');
+                  isLoading: true,
+                  onPressed: () {},
+                  title: AppStrings.loading.tr());
             } else if (state is CreateCourseSucess) {
               dismissDialog(context);
               await MyCoursesCubit.get(context).getMyCourses();
@@ -74,13 +77,13 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                           controller: _courseTextField,
                           validator: (name) {
                             if (name!.isEmpty) {
-                              return AppStrings.addCuourseName;
+                              return AppStrings.addCuourseName.tr();
                             }
                             return null;
                           },
                           decoration: InputDecoration(
                               fillColor: ColorManager.red,
-                              hintText: AppStrings.addCuourseName,
+                              hintText: AppStrings.addCuourseName.tr(),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.circular(AppSize.s10))),
@@ -97,7 +100,7 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                             }
                           },
                           child: Text(
-                            AppStrings.addCourse,
+                            AppStrings.addCourse.tr(),
                             style: getMediumText(
                                 color: ColorManager.darkBlue, fontSize: 10.sp),
                           ))

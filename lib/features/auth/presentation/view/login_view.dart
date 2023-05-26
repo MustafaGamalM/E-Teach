@@ -3,10 +3,11 @@ import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
-import 'package:e_teach/core/widgets/custom_popup.dart';
+import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/widgets/custom_button.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -37,7 +38,9 @@ class LoginScreen extends StatelessWidget {
           }, errorMsg: state.errorMsg, title: 'Error');
         } else if (state is LoginLoading) {
           customPopUp(context,
-              isLoading: true, onPressed: () {}, title: 'Loading');
+              isLoading: true,
+              onPressed: () {},
+              title: AppStrings.loading.tr());
         } else if (state is LoginSuccessfully) {
           _appReference.loggedInViewed();
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
@@ -58,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.login,
+                          AppStrings.login.tr(),
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
@@ -68,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.addYourDetails,
+                          AppStrings.addYourDetails.tr(),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
@@ -78,10 +81,10 @@ class LoginScreen extends StatelessWidget {
                       CustomAuthFormFiled(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        labelText: AppStrings.email,
+                        labelText: AppStrings.email.tr(),
                         validator: (v) {
                           if (v!.isEmpty) {
-                            return AppStrings.email;
+                            return AppStrings.email.tr();
                           }
                           return null;
                         },
@@ -92,11 +95,11 @@ class LoginScreen extends StatelessWidget {
                       CustomAuthFormFiled(
                           controller: _passwordController,
                           keyboardType: TextInputType.emailAddress,
-                          labelText: AppStrings.password,
+                          labelText: AppStrings.password.tr(),
                           obscureText: cubit.obsucre,
                           validator: (v) {
                             if (v!.isEmpty) {
-                              return AppStrings.password;
+                              return AppStrings.password.tr();
                             }
                             return null;
                           },
@@ -110,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                         height: 5.h,
                       ),
                       CustomButton(
-                          title: AppStrings.login,
+                          title: AppStrings.login.tr(),
                           onPressd: () {
                             if (_formKey.currentState!.validate()) {
                               cubit.login(_emailController.text,
@@ -124,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            AppStrings.forgotYourPassword,
+                            AppStrings.forgotYourPassword.tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -136,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                                     .pushNamed(Routes.forgetPasswordRoute);
                               },
                               child: Text(
-                                AppStrings.resetPassword,
+                                AppStrings.resetPassword.tr(),
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ))
                         ],
@@ -145,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            AppStrings.notHaveAccount,
+                            AppStrings.notHaveAccount.tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -157,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                                     .pushReplacementNamed(Routes.registerRoute);
                               },
                               child: Text(
-                                AppStrings.signUp,
+                                AppStrings.signUp.tr(),
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ))
                         ],

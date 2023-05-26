@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/api_services/refresh_token_model.dart';
-import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'dart:convert';
@@ -12,16 +11,26 @@ class ApiService {
   final AppReference _appRef;
   ApiService(this._dio, this._appRef) {
     _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        String? token = await _appRef.getToken();
+        options.headers['token'] = 'Bearer $token';
+        return handler.next(options);
+      },
+      onResponse: (response, handler) async {
+        return handler.next(response);
+      },
       onError: (e, handler) async {
         print('caaaaaaallalalalal');
         print('Error: ${e.response?.statusCode}');
-        if (e.response?.statusCode == 403 || e.response?.statusCode == 401) {
+        // if (await refreshToken(token)) {
+        //   return handler.resolve(await _retry(e.requestOptions));
+        // }
+        if (e.response?.statusCode == 400 ||
+            e.response?.statusCode == 401 ||
+            e.response?.statusCode == 403) {
           String? token = await _appRef.getToken();
-          // if (await refreshToken(token)) {
-          //   return handler.resolve(await _retry(e.requestOptions));
-          // }
           await refreshToken(token);
-          return _retry(e.requestOptions);
+          _retry(e.requestOptions);
         }
       },
     ));
@@ -44,7 +53,7 @@ class ApiService {
     final jsonResponse = json.decode(response.data);
     RefreshTokenModel baseResponse = RefreshTokenModel.fromJson(jsonResponse);
     if (baseResponse.response!.statusCode == 200) {
-      _appRef.setToken(baseResponse.response!.data!.token!);
+      await _appRef.setToken(baseResponse.response!.data!.token!);
       return true;
     } else {
       return false;
