@@ -2,7 +2,7 @@ import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
-import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
+import 'package:e_teach/core/utilis/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';

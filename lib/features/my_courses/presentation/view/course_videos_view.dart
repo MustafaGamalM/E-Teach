@@ -3,7 +3,7 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
-import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
+import 'package:e_teach/core/utilis/functions/functions.dart';
 import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/presentation/viewmodel/cubit/course_cubit.dart';
@@ -165,7 +165,7 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                                     ),
                                   ),
                                   Positioned(
-                                    right: -13.w,
+                                    right: (isRtl(context)) ? 84.w : -13.w,
                                     top: -4.h,
                                     child: Container(
                                       padding: EdgeInsets.all(30),

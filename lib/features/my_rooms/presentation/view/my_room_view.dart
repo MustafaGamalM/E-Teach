@@ -1,4 +1,4 @@
-import 'package:e_teach/core/utilis/functions/dismiss_dialog.dart';
+import 'package:e_teach/core/utilis/functions/functions.dart';
 import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/my_rooms/presentation/view/custom_my_room.dart';
 import 'package:e_teach/features/my_rooms/presentation/viewmodel/cubit/my_room_cubit.dart';

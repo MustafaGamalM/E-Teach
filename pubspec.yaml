@@ -39,6 +39,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_launcher_icons: ^0.13.1
   flutter_phoenix: ^1.1.1
   flutter_rating_bar: ^4.0.1
   flutter_svg: ^1.1.6
