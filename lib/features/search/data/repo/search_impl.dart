@@ -16,7 +16,7 @@ class SearchRepoImpl extends SearchRepo {
   Future<Either<Failure, SearchModel>> search(String courseName) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.pos(
+      var res = await _apiService.post(
           endPoint: AppConstatns.searchCourseEndPoint,
           data: {"token": token, "name": courseName});
       SearchModel model = SearchModel.fromJson(res);

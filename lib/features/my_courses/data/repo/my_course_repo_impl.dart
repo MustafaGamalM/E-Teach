@@ -20,7 +20,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
       String token = await _appReference.getToken();
       var res = await _apiService.get(
           endPoint: AppConstatns.myCoursesEndPoint, query: {"token": token});
-      if (res['Response']['statusCode'] == 200) {
+      if (res['Response'] != null) {
         MyCoursesModel myCoursesModel = MyCoursesModel.fromJson(res);
 
         return Right(myCoursesModel);
@@ -46,7 +46,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
       String name) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.pos(
+      var res = await _apiService.post(
           endPoint: AppConstatns.createCourseEndPoint,
           data: {"token": token, "name": name});
       if (res['Response']['statusCode'] == 200) {
@@ -57,9 +57,6 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
         return left(ServerFailure(res['Response']['msg']));
       }
     } catch (e) {
-      print('courseeeeeeeeeeeeeeeeeeeeee');
-      print(e.toString());
-      print('courseeeeeeeeeeeeeeeeeeeeee');
       if (e is DioError) {
         return left(
           ServerFailure.fromDioError(e),
@@ -77,7 +74,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
   Future<Either<Failure, UploadVideoModel>> uploadMyCourse(
       FormData formData) async {
     try {
-      var res = await _apiService.post2(
+      var res = await _apiService.postFile(
           endPoint: AppConstatns.uploadCourseEndPoint, data: formData);
       if (res['Response']['statusCode'] == 200) {
         UploadVideoModel myCoursesModel = UploadVideoModel.fromJson(res);

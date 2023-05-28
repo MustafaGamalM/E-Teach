@@ -61,7 +61,7 @@ class RegistertionScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.signUp,
+                          AppStrings.signUp.tr(),
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
@@ -133,7 +133,7 @@ class RegistertionScreen extends StatelessWidget {
                               child: RadioListTile(
                                   selectedTileColor: ColorManager.black,
                                   activeColor: ColorManager.black,
-                                  value: AppStrings.student,
+                                  value: 'student',
                                   title: Text(AppStrings.student.tr(),
                                       style: Theme.of(context)
                                           .textTheme
@@ -147,8 +147,8 @@ class RegistertionScreen extends StatelessWidget {
                               child: RadioListTile(
                                   selectedTileColor: ColorManager.black,
                                   activeColor: ColorManager.black,
-                                  value: AppStrings.instructor.tr(),
-                                  title: const Text(AppStrings.instructor),
+                                  value: 'instructor',
+                                  title: Text(AppStrings.instructor.tr()),
                                   groupValue: cubit.userType,
                                   onChanged: (value) {
                                     cubit.changeType(value!);

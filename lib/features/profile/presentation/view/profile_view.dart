@@ -5,6 +5,8 @@ import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
+import 'package:e_teach/core/utilis/functions/functions.dart';
+import 'package:e_teach/features/widgets/custom_logut.dart';
 import 'package:e_teach/features/widgets/custom_popup.dart';
 import 'package:e_teach/features/profile/presentation/viewmodel/cubit/profile_cubit.dart';
 import 'package:e_teach/features/widgets/custom_button.dart';
@@ -46,11 +48,60 @@ class _ProfileViewState extends State<ProfileView> {
     _emailController.text = await _appReference.getUserEmail();
   }
 
+  Future<void> _showRemoveAccountDialog(BuildContext ctx) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            AppStrings.removeAccount.tr(),
+            style: TextStyle(
+                fontSize: 15.sp,
+                color: ColorManager.black,
+                fontWeight: FontWeight.bold),
+          ),
+          content: Text(
+            AppStrings.areYouSureRemoveAccount.tr(),
+            style: TextStyle(
+                fontSize: 13.sp,
+                color: ColorManager.black,
+                fontWeight: FontWeight.normal),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(AppStrings.no.tr(),
+                  style: TextStyle(
+                      fontSize: 13.sp,
+                      color: ColorManager.black,
+                      fontWeight: FontWeight.normal)),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            ),
+            TextButton(
+              child: Text(AppStrings.yes.tr(),
+                  style: TextStyle(
+                      fontSize: 13.sp,
+                      color: ColorManager.babyBlue,
+                      fontWeight: FontWeight.normal)),
+              onPressed: () {
+                dismissDialog(ctx);
+                ProfileCubit.get(ctx).removeAccount();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is LogoutSuccessfully || state is RemoveAccountSuccessfully) {
+          dismissDialog(context);
           Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
           _appReference.clearShared();
         } else if (state is LogoutFailed) {
@@ -166,26 +217,8 @@ class _ProfileViewState extends State<ProfileView> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
-                              onPressed: () {
-                                cubit.logout();
-                              },
-                              icon: const Icon(
-                                Icons.logout,
-                                color: Colors.black,
-                              ),
-                              label: Text(
-                                AppStrings.logout.tr(),
-                                textAlign: TextAlign.right,
-                                style: getRegularText(
-                                    color: Colors.grey, fontSize: AppSize.s16),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
                                 onPressed: () {
-                                  cubit.removeAccount();
+                                  _showRemoveAccountDialog(context);
                                 },
                                 icon: const Icon(
                                   Icons.delete,
@@ -199,6 +232,32 @@ class _ProfileViewState extends State<ProfileView> {
                                       fontSize: AppSize.s16),
                                 )),
                           ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          CustomLogoutButton(
+                            onPressed: () async {
+                              await cubit.logout();
+                            },
+                          )
+                          //  SizedBox(
+                          //   width: double.infinity,
+                          //   child: ElevatedButton.icon(
+                          //     onPressed: () {
+                          //       cubit.logout();
+                          //     },
+                          //     icon: const Icon(
+                          //       Icons.logout,
+                          //       color: Colors.black,
+                          //     ),
+                          //     label: Text(
+                          //       AppStrings.logout.tr(),
+                          //       textAlign: TextAlign.right,
+                          //       style: getRegularText(
+                          //           color: Colors.grey, fontSize: AppSize.s16),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

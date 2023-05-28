@@ -65,6 +65,23 @@
    "yourRoomDesc" : "Add your room description",
    "supportInstructor" : "Support instructor",
    "description" : "Description",
-   "chat" : "Chat"
+   "chat" : "Chat",
+   "emptyCourses" : "No courses created" , 
+   "emptyRooms" : "No rooms created" ,
+   "yes" :"Yes",
+   "no" : "No",
+   "areYouSureRemoveAccount" : "Are you sure your want to remove account ?",
+   "connectTimeOut":"Connection timeout with ApiServer",
+   "sendTimeOut":"Send timeout with ApiServer",
+   "receiveTimeOut":"Receive timeout with ApiServer",
+   "badCertificate":"badCertificate with ApiServer",
+   "badResponse":"badResponse with ApiServer",
+   "requestCancled":"Request to ApiServer was canceld",
+   "connetionError":"connectionError with ApiServer",
+   "unexpectedError":"Unexpected Error, Please try again!",
+  "unKownError": "Opps There was an Error, Please try again",
+  "notFoundRequest":"Your request not found, Please try later!",
+  "internalServerError":"Internal Server error, Please try later"
+   
 
 }

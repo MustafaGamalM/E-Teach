@@ -56,7 +56,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   register(String email, String password, String type, String name) async {
     emit(RegisterLoading());
-    var res = await _authRepo.register(email, name, password, "instructor");
+    var res = await _authRepo.register(email, name, password, userType);
     res.fold((failure) {
       emit(RegisterFailed(failure.errMessage));
     }, (succes) {

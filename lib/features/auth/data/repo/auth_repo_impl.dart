@@ -14,7 +14,7 @@ class AuthReoImpl implements AuthRepo {
   Future<Either<Failure, LoginModel>> login(
       String email, String password) async {
     try {
-      var res = await _apiService.pos(
+      var res = await _apiService.post(
           endPoint: AppConstatns.loginEndPoint,
           data: {"email": email, "password": password});
       if (res['Response']['statusCode'] == 200) {
@@ -42,16 +42,16 @@ class AuthReoImpl implements AuthRepo {
   Future<Either<Failure, RegisterModel>> register(
       String email, String name, String password, String type) async {
     try {
-      var res =
-          await _apiService.pos(endPoint: AppConstatns.registerEndPoint, data: {
-        "email": email,
-        "password": password,
-        "name": name,
-        //    "type": type   default is instructor to add courses
-      });
+      var res = await _apiService.post(
+          endPoint: AppConstatns.registerEndPoint,
+          data: {
+            "email": email,
+            "password": password,
+            "name": name,
+            "type": type
+          });
       if (res['Response']['statusCode'] == 200) {
         RegisterModel registerModel = RegisterModel.fromJson(res);
-        print('===righttt====');
         return Right(registerModel);
       } else {
         return left(

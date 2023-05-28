@@ -62,4 +62,22 @@ class AppStrings {
   static const String supportInstructor = "supportInstructor";
   static const String description = "description";
   static const String chat = "chat";
+  static const String emptyRooms = "emptyRooms";
+  static const String emptyCourses = "emptyCourses";
+  static const String yes = "yes";
+  static const String no = "no";
+  static const String areYouSureRemoveAccount = "areYouSureRemoveAccount";
+
+  // api failures
+  static const String connectTimeOut = "connectTimeOut";
+  static const String sendTimeOut = "sendTimeOut";
+  static const String receiveTimeOut = "receiveTimeOut";
+  static const String badCertificate = "badCertificate";
+  static const String badResponse = "badResponse";
+  static const String requestCancled = "requestCancled";
+  static const String connetionError = "connetionError";
+  static const String unexpectedError = "unexpectedError";
+  static const String unKownError = "unKownError";
+  static const String notFoundRequest = "notFoundRequest";
+  static const String internalServerError = "internalServerError";
 }

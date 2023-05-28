@@ -10,30 +10,31 @@ class ApiService {
   final Dio _dio;
   final AppReference _appRef;
   ApiService(this._dio, this._appRef) {
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        String? token = await _appRef.getToken();
-        options.headers['token'] = 'Bearer $token';
-        return handler.next(options);
-      },
-      onResponse: (response, handler) async {
-        return handler.next(response);
-      },
-      onError: (e, handler) async {
-        print('caaaaaaallalalalal');
-        print('Error: ${e.response?.statusCode}');
-        // if (await refreshToken(token)) {
-        //   return handler.resolve(await _retry(e.requestOptions));
-        // }
-        if (e.response?.statusCode == 400 ||
-            e.response?.statusCode == 401 ||
-            e.response?.statusCode == 403) {
-          String? token = await _appRef.getToken();
-          await refreshToken(token);
-          _retry(e.requestOptions);
-        }
-      },
-    ));
+    // _dio.interceptors.add(InterceptorsWrapper(
+    //   onRequest: (options, handler) async {
+    //     String? token = await _appRef.getToken();
+    //     options.headers['token'] = 'Bearer $token';
+    //     return handler.next(options);
+    //   },
+    //   onResponse: (response, handler) async {
+    //     return handler.next(response);
+    //   },
+    //   onError: (e, handler) async {
+    //     print('caaaaaaallalalalal');
+    //     print('Error: ${e.response?.statusCode}');
+    //     // if (await refreshToken(token)) {
+    //     //   return handler.resolve(await _retry(e.requestOptions));
+    //     // }
+    //     if (e.response?.statusCode == 400 ||
+    //         e.response?.statusCode == 401 ||
+    //         e.response?.statusCode == 403) {
+    //       String? token = await _appRef.getToken();
+    //       await refreshToken(token);
+    //       _retry(e.requestOptions);
+    //     }
+    //   },
+    // )
+    // );
 
     if (kDebugMode) {
       _dio.interceptors.add(PrettyDioLogger(
@@ -83,7 +84,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> pos(
+  Future<Map<String, dynamic>> post(
       {required String endPoint,
       Map<String, dynamic>? query,
       Map<String, dynamic>? data}) async {
@@ -92,7 +93,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> post2(
+  Future<Map<String, dynamic>> postFile(
       {required String endPoint,
       Map<String, dynamic>? query,
       required FormData data}) async {
@@ -104,6 +105,18 @@ class ApiService {
         double percentage = (count / total) * 100;
         print('dio   ${percentage.toInt()}');
       },
+    );
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> delete(
+      {required String endPoint,
+      Map<String, dynamic>? query,
+      Map<String, dynamic>? data}) async {
+    var response = await _dio.delete(
+      '${AppConstatns.baseUrlApi}$endPoint',
+      queryParameters: query,
+      data: data,
     );
     return response.data;
   }

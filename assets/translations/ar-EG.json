@@ -65,6 +65,22 @@
   "yourRoomDesc" : "قم باضافة وصف الغرفة",
   "supportInstructor" : "دعم المحاضر",
   "description" : "وصف",
-  "chat" : "محادثة"
+  "chat" : "محادثة",
+  "emptyCourses" : "لم تنشأ دورات بعد" , 
+   "emptyRooms" : "لم تنشأ غرف بعد"  ,
+   "yes" :"نعم",
+   "no" : "لا",
+   "areYouSureRemoveAccount" : " هل انت متأكد تريد حذف الحساب ؟",
+   "connectTimeOut":"انتهت مهلة الاتصال بخادم",
+   "sendTimeOut":"إرسال المهلة مع خادم",
+   "receiveTimeOut":"تلقي المهلة مع خادم",
+   "badCertificate":"شهادة سيئة مع خادم",
+   "badResponse":"استجابة سيئة مع خادم",
+   "requestCancled":"تم إلغاء الطلب إلى خادم",
+   "connetionError":"خطأ في الاتصال بخادم",
+   "unexpectedError":"خطأ غير متوقع ، يرجى المحاولة مرة أخرى!",
+  "unKownError": "عفوا كان هناك خطأ ، يرجى المحاولة مرة أخرى",
+  "notFoundRequest":"لم يتم العثور على طلبك ، يرجى المحاولة لاحقًا!",
+  "internalServerError":"خطأ داخلي في الخادم ، يرجى المحاولة لاحقًا"
 
 }

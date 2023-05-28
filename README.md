@@ -26,7 +26,8 @@ Every user can choose his interests so application can recommend rooms depending
 - [x] Add materials to rooms 
 - [x] download material
 - [x] Ask question and reply 
-- [x] Search by people, keywords,rooms or cateory 
+- [x] Search by course
+- [x] student add favourite room & course
 
 ## 💻 Requirements
 

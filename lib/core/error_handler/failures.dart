@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 abstract class Failure {
   final String errMessage;
@@ -12,28 +14,28 @@ class ServerFailure extends Failure {
   factory ServerFailure.fromDioError(DioError dioError) {
     switch (dioError.type) {
       case DioErrorType.connectionTimeout:
-        return ServerFailure('Connection timeout with ApiServer');
+        return ServerFailure(AppStrings.connectTimeOut.tr());
       case DioErrorType.sendTimeout:
-        return ServerFailure('Send timeout with ApiServer');
+        return ServerFailure(AppStrings.sendTimeOut.tr());
       case DioErrorType.receiveTimeout:
-        return ServerFailure('Receive timeout with ApiServer');
+        return ServerFailure(AppStrings.receiveTimeOut.tr());
       case DioErrorType.badCertificate:
-        return ServerFailure('badCertificate with ApiServer');
+        return ServerFailure(AppStrings.badCertificate.tr());
       case DioErrorType.badResponse:
-        return ServerFailure('badResponse with ApiServer');
+        return ServerFailure(AppStrings.badResponse.tr());
       case DioErrorType.cancel:
-        return ServerFailure('Request to ApiServer was canceld');
+        return ServerFailure(AppStrings.requestCancled.tr());
       case DioErrorType.connectionError:
-        return ServerFailure('connectionError with ApiServer');
+        return ServerFailure(AppStrings.connetionError.tr());
       case DioErrorType.unknown:
-        return ServerFailure('Unexpected Error, Please try again!');
+        return ServerFailure(AppStrings.unexpectedError.tr());
       // if (dioError.message.contains('SocketException')) {
       //   return ServerFailure('No Internet Connection');
       // } else {
       //   return ServerFailure('Unexpected Error, Please try again!');
       // }
       default:
-        return ServerFailure('Opps There was an Error, Please try again');
+        return ServerFailure(AppStrings.unKownError.tr());
     }
   }
 
@@ -41,11 +43,11 @@ class ServerFailure extends Failure {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailure(response['error']['message']);
     } else if (statusCode == 404) {
-      return ServerFailure('Your request not found, Please try later!');
+      return ServerFailure(AppStrings.notFoundRequest.tr());
     } else if (statusCode == 500) {
-      return ServerFailure('Internal Server error, Please try later');
+      return ServerFailure(AppStrings.internalServerError.tr());
     } else {
-      return ServerFailure('Opps There was an Error, Please try again');
+      return ServerFailure(AppStrings.unKownError.tr());
     }
   }
 }

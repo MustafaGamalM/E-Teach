@@ -18,7 +18,7 @@ class MyRoomRepoImpl implements MyRoomRepo {
       String name, String description) async {
     var token = await _appReference.getToken();
     try {
-      var res = await _apiService.pos(
+      var res = await _apiService.post(
           endPoint: AppConstatns.createMyRoomEndPoint,
           data: {"name": name, "token": token, "description": description});
 

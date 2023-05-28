@@ -114,78 +114,95 @@ class _MyCoursesViewState extends State<MyCoursesView> {
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(AppPadding.p2.w),
-                      child: ListView.separated(
-                        itemCount: state.myCoursesModel.response!.data!.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed(Routes.uploadCourse, arguments: {
-                                  'id': state
-                                      .myCoursesModel.response!.data![index].id
-                                });
-                              },
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    height: 10.h,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(18),
-                                      color: ColorManager.move,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 2.w),
-                                    child: Row(
+                      child: (state.myCoursesModel.response!.data!.isNotEmpty)
+                          ? ListView.separated(
+                              itemCount:
+                                  state.myCoursesModel.response!.data!.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(
+                                          Routes.uploadCourse,
+                                          arguments: {
+                                            'id': state.myCoursesModel.response!
+                                                .data![index].id
+                                          });
+                                    },
+                                    child: Stack(
+                                      alignment: Alignment.center,
                                       children: [
-                                        CircleAvatar(
-                                          maxRadius: 2.5.h,
-                                          backgroundColor: Colors.white,
-                                          child: Icon(
-                                            Icons.lightbulb_circle,
+                                        Container(
+                                          height: 10.h,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
                                             color: ColorManager.move,
-                                            size: 2.5.h,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 2.w,
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 2.w),
+                                          child: Row(
+                                            children: [
+                                              CircleAvatar(
+                                                maxRadius: 2.5.h,
+                                                backgroundColor: Colors.white,
+                                                child: Icon(
+                                                  Icons.lightbulb_circle,
+                                                  color: ColorManager.move,
+                                                  size: 2.5.h,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 2.w,
+                                              ),
+                                              Text(
+                                                state.myCoursesModel.response!
+                                                    .data![index].name!,
+                                                style: getRegularText(
+                                                        color:
+                                                            ColorManager.white,
+                                                        fontSize: 16.sp)
+                                                    .copyWith(
+                                                        overflow:
+                                                            TextOverflow.fade),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        Text(
-                                          state.myCoursesModel.response!
-                                              .data![index].name!,
-                                          style: getRegularText(
-                                                  color: ColorManager.white,
-                                                  fontSize: 16.sp)
-                                              .copyWith(
-                                                  overflow: TextOverflow.fade),
+                                        Positioned(
+                                          right:
+                                              (isRtl(context)) ? 84.w : -13.w,
+                                          top: -4.h,
+                                          child: Container(
+                                            padding: EdgeInsets.all(30),
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.transparent,
+                                                border: Border.all(
+                                                    width: 18,
+                                                    color:
+                                                        ColorManager.darkBlue)),
+                                          ),
                                         )
                                       ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: (isRtl(context)) ? 84.w : -13.w,
-                                    top: -4.h,
-                                    child: Container(
-                                      padding: EdgeInsets.all(30),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.transparent,
-                                          border: Border.all(
-                                              width: 18,
-                                              color: ColorManager.darkBlue)),
-                                    ),
-                                  )
-                                ],
-                              ));
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            height: 3.h,
-                          );
-                        },
-                      ),
+                                    ));
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  height: 3.h,
+                                );
+                              },
+                            )
+                          : Center(
+                              child: Text(
+                                AppStrings.emptyCourses.tr(),
+                                style: TextStyle(
+                                    color: ColorManager.black,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                     ),
                   ),
                 if (state is MyCoursesFailed)

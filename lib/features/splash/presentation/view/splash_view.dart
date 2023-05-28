@@ -7,7 +7,6 @@ import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../core/utilis/app_manager/app_reference.dart';
 import '../../../../core/utilis/di.dart';
@@ -33,10 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
       if (appReference.sharedPreferences.getBool(LOGGEDIN_VIEWED_KEY) == true) {
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
       } else {
-        Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+        //  Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+        Navigator.popAndPushNamed(context, Routes.loginRoute);
       }
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
+      //  Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
+      Navigator.popAndPushNamed(context, Routes.onBoardingRoute);
     }
   }
 

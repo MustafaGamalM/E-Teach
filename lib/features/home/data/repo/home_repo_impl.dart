@@ -93,7 +93,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, RoomChatModel>> getRoomChat(int roomId) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.pos(
+      var res = await _apiService.post(
           endPoint: AppConstatns.roomChatId,
           data: {"token": token, "room_id": roomId});
       RoomChatModel roomModel = RoomChatModel.fromJson(res);
