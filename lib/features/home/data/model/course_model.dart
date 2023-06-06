@@ -13,7 +13,7 @@ class CourseModel {
 class Response {
   String? msg;
   int? statusCode;
-  List<Data>? data;
+  List<CoursesData>? data;
 
   Response({this.msg, this.statusCode, this.data});
 
@@ -21,15 +21,15 @@ class Response {
     msg = json['msg'];
     statusCode = json['statusCode'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <CoursesData>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new CoursesData.fromJson(v));
       });
     }
   }
 }
 
-class Data {
+class CoursesData {
   int? id;
   String? name;
   String? instructorName;
@@ -39,7 +39,7 @@ class Data {
   List<VideoCourse>? videoCourse;
   List<Feedback>? feedback;
 
-  Data(
+  CoursesData(
       {this.id,
       this.name,
       this.instructorName,
@@ -49,7 +49,7 @@ class Data {
       this.videoCourse,
       this.feedback});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CoursesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     instructorName = json['instructor_name'];

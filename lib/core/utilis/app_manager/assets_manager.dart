@@ -31,6 +31,7 @@ class ImageAssets {
   static const String onlineRoomView = "$imagePath/online_rooom.svg";
   static const String card = "$imagePath/card.svg";
   static const String bookApp = "$imagePath/book_app.svg";
+  static const String user = '$imagePath/user.png';
 }
 
 class JsonAssets {

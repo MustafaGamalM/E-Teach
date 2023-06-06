@@ -8,5 +8,6 @@ import 'package:e_teach/features/my_courses/data/model/upload_video.dart';
 abstract class MyCoursesRepo {
   Future<Either<Failure, MyCoursesModel>> getMyCourses();
   Future<Either<Failure, CreateCourseModel>> createMyCourses(String name);
-  Future<Either<Failure, UploadVideoModel>> uploadMyCourse(FormData formData);
+  Future<Either<Failure, UploadVideoModel>> uploadMyCourse(
+      FormData formData, Function(int, int) onProgress);
 }

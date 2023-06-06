@@ -81,7 +81,7 @@
    "unexpectedError":"Unexpected Error, Please try again!",
   "unKownError": "Opps There was an Error, Please try again",
   "notFoundRequest":"Your request not found, Please try later!",
-  "internalServerError":"Internal Server error, Please try later"
-   
+  "internalServerError":"Internal Server error, Please try later",
+   "percentage" : "Percentage uploading :    "
 
 }

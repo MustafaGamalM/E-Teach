@@ -35,21 +35,14 @@ class MyCoursesCubit extends Cubit<CourseState> {
     });
   }
 
-  uploadMyCourses(FormData formData) async {
+  uploadMyCourses(FormData formData, Function(int, int) onProgress) async {
     emit(UploadCourseLoading());
-    var res = await _myCoursesRepo.uploadMyCourse(formData);
+    var res = await _myCoursesRepo.uploadMyCourse(formData, onProgress);
     res.fold((failure) {
       print(failure.errMessage);
       emit(UploadCourseFailed(failure.errMessage));
     }, (data) {
       emit(UploadCourseSucess(data));
     });
-  }
-
-  int fullProg = 0;
-  void updateProgress() {
-    //print(fullProg);
-    // change fullProg withb progress
-    emit(ProgressChanged());
   }
 }

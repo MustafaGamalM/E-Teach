@@ -1,4 +1,5 @@
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
+import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/routes_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
@@ -6,6 +7,7 @@ import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:e_teach/core/utilis/di.dart';
 import 'package:e_teach/features/home/presentation/view/widgets/custom_courses_widget.dart';
 import 'package:e_teach/features/home/presentation/view/widgets/custom_room.dart';
+import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/widgets/profile_widget.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,13 +31,12 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     setName();
+
     super.initState();
   }
 
   setName() async {
-    setState(() async {
-      name = await _appReference.getUserName();
-    });
+    name = await _appReference.getUserName();
   }
 
   @override
@@ -44,8 +45,11 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: ColorManager.primary,
       appBar: AppBar(
         primary: true,
-        leading: AvaterWidget(""),
-        title: Text(name ?? ' '),
+        leading: const AvaterWidget(ImageAssets.user),
+        title: Text(
+          name ?? ' ',
+          style: TextStyle(color: ColorManager.white, fontSize: 16.sp),
+        ),
       ),
       body: Column(children: [
         SizedBox(height: 6.h),
@@ -75,19 +79,22 @@ class _HomeViewState extends State<HomeView> {
                     topLeft: Radius.circular(AppSize.s4.h),
                     topRight: Radius.circular(AppSize.s4.h)),
                 color: ColorManager.white),
-            child: ListView(physics: const BouncingScrollPhysics(), children: [
-              // CustomRowWidget(AppStrings.courses, () {
-              //   return print('click');
-              // }),
-              // SizedBox(
-              //   height: 4.h,
-              // ),
-              const CustomCoursesWidget(),
-              SizedBox(
-                height: AppSize.s1.h,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await MainCubit.get(context).getRooms();
+                await MainCubit.get(context).getCourses();
+              },
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    const CustomCoursesWidget(),
+                    SizedBox(height: AppSize.s1.h),
+                    const CustomRoomsWidget(),
+                  ],
+                ),
               ),
-              CustomRoomsWidget()
-            ]),
+            ),
           ),
         )
       ]),

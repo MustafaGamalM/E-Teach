@@ -11,24 +11,19 @@ class AvaterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // todo : navigate to  profile screen
-      },
-      child: Container(
-        width: width ?? 1.h,
-        height: height ?? 1.h,
-        margin: EdgeInsets.only(top: .70.h, left: 1.5.w, right: 1.5.w),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.s360),
-          border: Border.all(width: .2.h, color: ColorManager.yellow),
-        ),
-        child: ClipOval(
-            child: Image.asset(
-          'assets/images/Must.JPG',
-          fit: BoxFit.cover,
-        )),
+    return Container(
+      width: width ?? 1.h,
+      height: height ?? 1.h,
+      margin: EdgeInsets.only(top: .70.h, left: 1.5.w, right: 1.5.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSize.s360),
+        border: Border.all(width: .2.h, color: ColorManager.yellow),
       ),
+      child: ClipOval(
+          child: Image.asset(
+        image,
+        fit: BoxFit.cover,
+      )),
     );
   }
 }

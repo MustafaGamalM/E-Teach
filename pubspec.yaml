@@ -47,8 +47,6 @@ dependencies:
   gallery_saver: ^2.3.2
   get_it: ^7.2.0
   image_picker: ^0.8.7+4
-  internet_connection_checker: ^1.0.0+1
-  liquid_progress_indicator: ^0.4.0
   lottie: ^2.2.0
   pretty_dio_logger: ^1.3.1
   share_plus: ^6.3.4
@@ -70,8 +68,10 @@ dev_dependencies:
     sdk: flutter
 flutter_icons:
   android: true
-  ios : true
-  image_path: "assets/images/logo1.jpg"    
+  ios: true
+  image_path: "assets/images/logo_icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/logo_icon_foreground.png" 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class UploadCourse extends StatefulWidget {
   UploadCourse({super.key, required this.roomId});
@@ -40,6 +38,8 @@ class _UploadCourseState extends State<UploadCourse> {
     }
   }
 
+  double per = 0;
+
   void sendVideo(File file, BuildContext context) async {
     File? videoFile = file;
     AppReference _appRef = instance<AppReference>();
@@ -52,7 +52,16 @@ class _UploadCourseState extends State<UploadCourse> {
         "name": _videoTextController.text
       });
 
-      MyCoursesCubit.get(context).uploadMyCourses(formData);
+      MyCoursesCubit.get(context).uploadMyCourses(
+        formData,
+        (count, total) {
+          setState(() {
+            double percentage = (count / total) * 100;
+            per = percentage;
+          });
+          // print('dio   ${percentage.toInt()}');
+        },
+      );
     }
   }
 
@@ -65,92 +74,96 @@ class _UploadCourseState extends State<UploadCourse> {
         elevation: 0.0,
         leading: BackButton(color: ColorManager.primary),
       ),
-      body: BlocConsumer<MyCoursesCubit, CourseState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      body: BlocBuilder<MyCoursesCubit, CourseState>(
         builder: (context, state) {
-          var cubit = MyCoursesCubit.get(context);
-          return Padding(
-            padding:
-                EdgeInsets.only(top: 10.h, left: 7.w, right: 7.w, bottom: 5.h),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Text(
-                    AppStrings.canSubmitVideo.tr(),
-                    style:
-                        getBoldText(color: ColorManager.black, fontSize: 18.sp),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Theme(
-                      data: ThemeData(
-                          inputDecorationTheme: InputDecorationTheme(
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(2)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(2)))),
-                      child: CustomAuthFormFiled(
-                        controller: _videoTextController,
-                        keyboardType: TextInputType.emailAddress,
-                        hintText: AppStrings.courseName.tr(),
-                        labelText: AppStrings.courseName.tr(),
-                        validator: (e) {
-                          if (e!.isEmpty) {
-                            return AppStrings.courseName.tr();
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 10.h, left: 7.w, right: 7.w, bottom: 5.h),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Text(
+                      AppStrings.canSubmitVideo.tr(),
+                      style: getBoldText(
+                          color: ColorManager.black, fontSize: 18.sp),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Theme(
+                        data: ThemeData(
+                            inputDecorationTheme: InputDecorationTheme(
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(2)))),
+                        child: CustomAuthFormFiled(
+                          controller: _videoTextController,
+                          keyboardType: TextInputType.emailAddress,
+                          hintText: AppStrings.courseName.tr(),
+                          labelText: AppStrings.courseName.tr(),
+                          validator: (e) {
+                            if (e!.isEmpty) {
+                              return AppStrings.courseName.tr();
+                            }
+                          },
+                        )),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 6.h,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                            primary: ColorManager.babyBlue),
+                        icon: Icon(
+                          Icons.download,
+                          color: ColorManager.black,
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            pickVideo(context);
                           }
                         },
-                      )),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 6.h,
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                          primary: ColorManager.babyBlue),
-                      icon: Icon(
-                        Icons.download,
-                        color: ColorManager.black,
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          pickVideo(context);
-                        }
-                      },
-                      label: Text(
-                        AppStrings.uploadVideo.tr(),
-                        style: getMediumText(
-                            color: ColorManager.black, fontSize: 10.sp),
+                        label: Text(
+                          AppStrings.uploadVideo.tr(),
+                          style: getMediumText(
+                              color: ColorManager.black, fontSize: 10.sp),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                    width: double.infinity,
-                    child: LiquidLinearProgressIndicator(
-                      value: (cubit.fullProg) / 100,
-                      valueColor: AlwaysStoppedAnimation(
-                        ColorManager.babyBlue,
-                      ),
-                      backgroundColor: Colors
-                          .white, // Defaults to the current Theme's backgroundColor.
-                      borderColor: ColorManager.grey,
-                      borderWidth: 1.0,
-                      borderRadius: 12.0,
-                      direction: Axis
-                          .horizontal, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.
-                      center: Text(AppStrings.loading.tr()),
+                    SizedBox(
+                      height: 5.h,
                     ),
-                  )
-                ],
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                          text: AppStrings.percentage.tr(),
+                          style: TextStyle(
+                              fontSize: 16.sp, color: ColorManager.black)),
+                      TextSpan(
+                          text: '${per.toInt()}',
+                          style: TextStyle(
+                              fontSize: 16.sp, color: ColorManager.babyBlue)),
+                    ])),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 10.h,
+                        height: 10.h,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3.w,
+                          value: per.toInt() / 100,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

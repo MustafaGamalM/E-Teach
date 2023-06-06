@@ -16,8 +16,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-class CustomRoomsWidget extends StatelessWidget {
+class CustomRoomsWidget extends StatefulWidget {
   const CustomRoomsWidget({super.key});
+
+  @override
+  State<CustomRoomsWidget> createState() => _CustomRoomsWidgetState();
+}
+
+class _CustomRoomsWidgetState extends State<CustomRoomsWidget> {
+  @override
+  void initState() {
+    MainCubit.get(context).getRooms();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

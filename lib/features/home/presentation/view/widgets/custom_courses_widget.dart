@@ -28,8 +28,9 @@ class _CustomCoursesWidgetState extends State<CustomCoursesWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        if (state is GetCourseLoading) {
-          return const Center(child: CustomLoading());
+        if (state is GetCourseFailed) {
+          return CustomErrorWidget(
+              voidCallback: () => MainCubit.get(context).getCourses());
         } else if (state is GetCourseSuccessfully) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -65,8 +66,7 @@ class _CustomCoursesWidgetState extends State<CustomCoursesWidget> {
             ],
           );
         } else {
-          return CustomErrorWidget(
-              voidCallback: () => MainCubit.get(context).getCourses());
+          return const Center(child: CustomLoading());
         }
       },
     );

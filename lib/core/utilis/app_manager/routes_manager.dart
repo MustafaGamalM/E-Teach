@@ -99,7 +99,7 @@ class RouteGenerator {
                   providers: [
                     BlocProvider(
                         create: (context) =>
-                            MainCubit(instance<HomeRepoImpl>())..getRooms()),
+                            MainCubit(instance<HomeRepoImpl>())),
                     BlocProvider(
                         create: (context) =>
                             ProfileCubit(instance<ProfileRepoImpl>())

@@ -96,16 +96,10 @@ class ApiService {
   Future<Map<String, dynamic>> postFile(
       {required String endPoint,
       Map<String, dynamic>? query,
-      required FormData data}) async {
-    var response = await _dio.post(
-      '${AppConstatns.baseUrlApi}$endPoint',
-      queryParameters: query,
-      data: data,
-      onSendProgress: (count, total) {
-        double percentage = (count / total) * 100;
-        print('dio   ${percentage.toInt()}');
-      },
-    );
+      required FormData data,
+      required Function(int, int) onProgress}) async {
+    var response = await _dio.post('${AppConstatns.baseUrlApi}$endPoint',
+        queryParameters: query, data: data, onSendProgress: onProgress);
     return response.data;
   }
 

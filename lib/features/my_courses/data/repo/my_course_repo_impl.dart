@@ -72,10 +72,12 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
 
   @override
   Future<Either<Failure, UploadVideoModel>> uploadMyCourse(
-      FormData formData) async {
+      FormData formData, Function(int, int) onProgress) async {
     try {
       var res = await _apiService.postFile(
-          endPoint: AppConstatns.uploadCourseEndPoint, data: formData);
+          endPoint: AppConstatns.uploadCourseEndPoint,
+          data: formData,
+          onProgress: onProgress);
       if (res['Response']['statusCode'] == 200) {
         UploadVideoModel myCoursesModel = UploadVideoModel.fromJson(res);
         return Right(myCoursesModel);

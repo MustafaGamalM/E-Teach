@@ -67,6 +67,7 @@ class AppStrings {
   static const String yes = "yes";
   static const String no = "no";
   static const String areYouSureRemoveAccount = "areYouSureRemoveAccount";
+  static const String percentage = "percentage";
 
   // api failures
   static const String connectTimeOut = "connectTimeOut";
