@@ -18,7 +18,7 @@ class AvaterWidget extends StatelessWidget {
       child: Container(
         width: width ?? 1.h,
         height: height ?? 1.h,
-        margin: EdgeInsets.all(.70.h),
+        margin: EdgeInsets.only(top: .70.h, left: 1.5.w, right: 1.5.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s360),
           border: Border.all(width: .2.h, color: ColorManager.yellow),

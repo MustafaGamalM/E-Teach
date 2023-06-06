@@ -14,6 +14,7 @@ import 'package:e_teach/features/home/presentation/view/course/videos_course.dar
 import 'package:e_teach/features/home/presentation/view/main_view.dart';
 import 'package:e_teach/features/home/presentation/view/room/room_chat_view.dart';
 import 'package:e_teach/features/home/presentation/view/room/room_view.dart';
+import 'package:e_teach/features/home/presentation/view/room/see_all_room.dart';
 import 'package:e_teach/features/home/presentation/viewmodel/cubit/main_cubit.dart';
 import 'package:e_teach/features/my_courses/data/repo/my_course_repo_impl.dart';
 import 'package:e_teach/features/my_courses/presentation/view/course_videos_view.dart';
@@ -52,6 +53,7 @@ class Routes {
   static const String roomDescView = "/roomDescView";
   static const String roomChatView = "/roomChatView";
   static const String sellAllCoursesView = "/sellAllCoursesView";
+  static const String sellAllRoomsView = "/sellAllRoomsView";
 }
 
 class RouteGenerator {
@@ -200,7 +202,13 @@ class RouteGenerator {
             courseModel: courseModelMap['courseModel'],
           );
         });
-
+      case Routes.sellAllRoomsView:
+        return MaterialPageRoute(builder: (_) {
+          var roomModelMap = routeSettings.arguments as Map;
+          return SellAllRoomsView(
+            roomData: roomModelMap['roomsModel'],
+          );
+        });
       default:
         return unDefinedRoute();
     }

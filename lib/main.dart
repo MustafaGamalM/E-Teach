@@ -23,11 +23,11 @@ void main() async {
   runApp(EasyLocalization(
       supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
       path: AEETS_LOCALISATION_PATH,
-      child: Phoenix(child: MyApp())));
+      child: Phoenix(child: const MyApp())));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

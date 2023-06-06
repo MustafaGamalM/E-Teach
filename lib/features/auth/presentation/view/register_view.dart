@@ -34,11 +34,13 @@ class RegistertionScreen extends StatelessWidget {
           appReference.setUserEmail(state.email);
           appReference.setUserName(state.name);
         } else if (state is RegisterFailed) {
-          customPopUp(context,
-              isLoading: false,
-              onPressed: () {},
-              errorMsg: state.errorMsg,
-              title: 'Error');
+          customPopUp(context, isLoading: false, onPressed: () {
+            AuthCubit.get(context).register(
+                emailController.text,
+                passwordController.text,
+                AuthCubit.get(context).userType,
+                nameController.text);
+          }, errorMsg: state.errorMsg, title: "");
         } else if (state is RegisterLoading) {
           customPopUp(context,
               isLoading: true,

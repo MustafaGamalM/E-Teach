@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
           customPopUp(context, isLoading: false, onPressed: () async {
             await BlocProvider.of<AuthCubit>(context)
                 .login(_emailController.text, _passwordController.text);
-          }, errorMsg: state.errorMsg, title: 'Error');
+          }, errorMsg: state.errorMsg, title: '');
         } else if (state is LoginLoading) {
           customPopUp(context,
               isLoading: true,

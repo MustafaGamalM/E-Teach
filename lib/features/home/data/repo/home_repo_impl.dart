@@ -2,10 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
-import 'package:e_teach/core/utilis/app_manager/constants_manager.dart';
+import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/features/home/data/model/course_model.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:e_teach/features/home/data/model/rate_course.dart';
 import 'package:e_teach/features/home/data/model/room_chat_model.dart';
 import 'package:e_teach/features/home/data/model/room_mdel.dart';
 import 'package:e_teach/features/home/data/model/single_course_model.dart';
@@ -24,11 +25,8 @@ class HomeRepoImpl implements HomeRepo {
       var res = await _apiService
           .get(endPoint: AppConstatns.coursesEndPoint, query: {"token": token});
       CourseModel courses = CourseModel.fromJson(res);
-      print('doneee');
       return Right(courses);
     } catch (e) {
-      print('eeee');
-      print(e.toString());
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
@@ -49,15 +47,11 @@ class HomeRepoImpl implements HomeRepo {
           endPoint: "show_videos_course_id",
           query: {"token": token, "course_id": courseId});
       SingleCourseModel course = SingleCourseModel.fromJson(res);
-      print('gggggggg');
       return Right(course);
     } catch (e) {
-      print('eeeee111' + e.toString());
-
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
-        print('eeeee1');
         return left(
           ServerFailure(
             e.toString(),
@@ -79,7 +73,6 @@ class HomeRepoImpl implements HomeRepo {
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
-        print('eeeee1');
         return left(
           ServerFailure(
             e.toString(),
@@ -94,7 +87,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.post(
-          endPoint: AppConstatns.roomChatId,
+          endPoint: AppConstatns.roomChatIdEndPoint,
           data: {"token": token, "room_id": roomId});
       RoomChatModel roomModel = RoomChatModel.fromJson(res);
       return Right(roomModel);
@@ -102,7 +95,35 @@ class HomeRepoImpl implements HomeRepo {
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
       } else {
-        print('room chat errrrrrrrrrrrrrrr');
+        return left(
+          ServerFailure(
+            e.toString(),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, RateCourseModel>> rateCourseModel(
+      int rateNamber, int courseId) async {
+    try {
+      String token = await _appReference.getToken();
+      var res = await _apiService.post(
+          endPoint: AppConstatns.rateCourseEndPoint,
+          data: {"token": token, "course_id": courseId, "body": rateNamber});
+      RateCourseModel rateModel = RateCourseModel.fromJson(res);
+      if (res['Response']['statusCode'] == 200) {
+        return Right(rateModel);
+      } else {
+        return left(
+          ServerFailure(AppStrings.unKownError),
+        );
+      }
+    } catch (e) {
+      if (e is DioError) {
+        return Left(ServerFailure.fromDioError(e));
+      } else {
         return left(
           ServerFailure(
             e.toString(),

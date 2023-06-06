@@ -150,20 +150,36 @@ class _MyRoomViewState extends State<MyRoomView> {
                             // height: 50.h,
                             child: Padding(
                               padding: EdgeInsets.only(left: 3.w, right: 3.w),
-                              child: ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) => CustomMyRoom(
-                                      desc: state.roomModel.response!
-                                          .data![index].description!,
-                                      title: state.roomModel.response!
-                                          .data![index].name!),
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                        height: 2.h,
+                              child: (state
+                                      .roomModel.response!.data!.isNotEmpty)
+                                  ? ListView.separated(
+                                      shrinkWrap: true,
+                                      physics: const BouncingScrollPhysics(),
+                                      itemBuilder: (context, index) =>
+                                          CustomMyRoom(
+                                              desc:
+                                                  state
+                                                      .roomModel
+                                                      .response!
+                                                      .data![index]
+                                                      .description!,
+                                              title: state.roomModel.response!
+                                                  .data![index].name!),
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                      itemCount: state
+                                          .roomModel.response!.data!.length)
+                                  : Center(
+                                      child: Text(
+                                        AppStrings.emptyCourses.tr(),
+                                        style: TextStyle(
+                                            color: ColorManager.black,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                  itemCount:
-                                      state.roomModel.response!.data!.length),
+                                    ),
                             ),
                           )
                       ],

@@ -14,7 +14,7 @@ const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
 class AppReference {
   SharedPreferences sharedPreferences;
   AppReference(this.sharedPreferences);
-// lang *********
+// setter and getter language
   Future<String> getPrefsLanguage() async {
     String? language = sharedPreferences.getString(PREFS_KEY_LANG);
     if (language != null && language.isNotEmpty) {
