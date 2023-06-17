@@ -23,7 +23,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService
-          .get(endPoint: AppConstatns.coursesEndPoint, query: {"token": token});
+          .get(endPoint: AppConstants.coursesEndPoint, query: {"token": token});
       CourseModel courses = CourseModel.fromJson(res);
       return Right(courses);
     } catch (e) {
@@ -66,7 +66,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService
-          .get(endPoint: AppConstatns.getRoomEndPoint, query: {"token": token});
+          .get(endPoint: AppConstants.getRoomEndPoint, query: {"token": token});
       RoomModel course = RoomModel.fromJson(res);
       return Right(course);
     } catch (e) {
@@ -83,14 +83,28 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, RoomChatModel>> getRoomChat(int roomId) async {
+  Future<Either<Failure, RoomChatModel>> getRoomChat(
+      {required int roomId, String? message}) async {
     try {
       String token = await _appReference.getToken();
-      var res = await _apiService.post(
-          endPoint: AppConstatns.roomChatIdEndPoint,
-          data: {"token": token, "room_id": roomId});
-      RoomChatModel roomModel = RoomChatModel.fromJson(res);
-      return Right(roomModel);
+      if (message == null || message.isEmpty) {
+        var res = await _apiService.post(
+            endPoint: AppConstants.roomChatIdEndPoint,
+            data: {"token": token, "room_id": roomId});
+        print('============');
+        print(res['Room Chat'][0]);
+        print('============');
+
+        RoomChatModel roomModel = RoomChatModel.fromJson(res);
+
+        return Right(roomModel);
+      } else {
+        var res = await _apiService.post(
+            endPoint: AppConstants.roomChatIdEndPoint,
+            data: {"token": token, "room_id": roomId, "message": message});
+        RoomChatModel roomModel = RoomChatModel.fromJson(res);
+        return Right(roomModel);
+      }
     } catch (e) {
       if (e is DioError) {
         return Left(ServerFailure.fromDioError(e));
@@ -110,7 +124,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.post(
-          endPoint: AppConstatns.rateCourseEndPoint,
+          endPoint: AppConstants.rateCourseEndPoint,
           data: {"token": token, "course_id": courseId, "body": rateNamber});
       RateCourseModel rateModel = RateCourseModel.fromJson(res);
       if (res['Response']['statusCode'] == 200) {

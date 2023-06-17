@@ -13,8 +13,8 @@ class PaymentRepoImpl extends PaymentRepo {
   Future<Either<Failure, Response>> getPaymentAuthRequest() async {
     try {
       var res = await _apiServices.postPayMob(
-          endPoint: AppConstatns.authEndPoint,
-          data: {"api_key": AppConstatns.apiKey});
+          endPoint: AppConstants.authEndPoint,
+          data: {"api_key": AppConstants.apiKey});
       return Right(res);
     } catch (e) {
       return left(ServerFailure(e.toString()));
@@ -25,8 +25,8 @@ class PaymentRepoImpl extends PaymentRepo {
   Future<Either<Failure, Response>> getOrderRegistrationID(String price) async {
     try {
       var res = await _apiServices
-          .postPayMob(endPoint: AppConstatns.orderEndPoint, data: {
-        'auth_token': AppConstatns.authTokenFirst,
+          .postPayMob(endPoint: AppConstants.orderEndPoint, data: {
+        'auth_token': AppConstants.authTokenFirst,
         "delivery_needed": "false",
         "amount_cents": price,
         "currency": "EGP",
@@ -48,11 +48,11 @@ class PaymentRepoImpl extends PaymentRepo {
   }) async {
     try {
       var res = await _apiServices
-          .postPayMob(endPoint: AppConstatns.paymentKeyEndPoint, data: {
-        "auth_token": AppConstatns.authTokenFirst,
+          .postPayMob(endPoint: AppConstants.paymentKeyEndPoint, data: {
+        "auth_token": AppConstants.authTokenFirst,
         "amount_cents": price,
         "expiration": 3600,
-        "order_id": AppConstatns.orderId,
+        "order_id": AppConstants.orderId,
         "billing_data": {
           "apartment": "NA",
           "email": email,
@@ -69,7 +69,7 @@ class PaymentRepoImpl extends PaymentRepo {
           "state": "NA"
         },
         "currency": "EGP",
-        "integration_id": AppConstatns.paymentCardId,
+        "integration_id": AppConstants.paymentCardId,
         "lock_order_when_paid": "false"
       });
       return Right(res);
@@ -82,9 +82,9 @@ class PaymentRepoImpl extends PaymentRepo {
   Future<Either<Failure, Response>> getRefCode() async {
     try {
       var res = await _apiServices
-          .postPayMob(endPoint: AppConstatns.refCodeEndPoint, data: {
+          .postPayMob(endPoint: AppConstants.refCodeEndPoint, data: {
         "source": {"identifier": "AGGREGATOR", "subtype": "AGGREGATOR"},
-        "payment_token": AppConstatns.finalPaymentToken
+        "payment_token": AppConstants.finalPaymentToken
       });
       return Right(res);
     } catch (e) {
@@ -96,9 +96,9 @@ class PaymentRepoImpl extends PaymentRepo {
   Future<Either<Failure, Response>> mobileWallet() async {
     try {
       var res = await _apiServices
-          .postPayMob(endPoint: AppConstatns.refCodeEndPoint, data: {
+          .postPayMob(endPoint: AppConstants.refCodeEndPoint, data: {
         "source": {"identifier": "AGGREGATOR", "subtype": "WALLET"},
-        "payment_token": AppConstatns.finalPaymentToken
+        "payment_token": AppConstants.finalPaymentToken
       });
       return Right(res);
     } catch (e) {

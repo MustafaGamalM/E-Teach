@@ -1,11 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
-import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:meta/meta.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +13,6 @@ class SettingsCubit extends Cubit<SettingsState> {
   final AppReference _appReference;
 
   changeLanguage() {
-    print('clicked');
     _appReference.changeLanguage();
     emit(ChangeLanguageState());
   }
@@ -25,7 +20,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   changeTheme() {}
 
   shareApp() {
-    Share.share(AppConstatns.appLink);
+    Share.share(AppConstants.appLink);
   }
 
   contactDeveloper() async {

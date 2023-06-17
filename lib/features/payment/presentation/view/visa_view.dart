@@ -35,7 +35,7 @@ class _VisaScreenState extends State<VisaScreen> {
           leading: const BackButton(color: Colors.teal),
         ),
         body: WebView(
-          initialUrl: AppConstatns.viseUrl,
+          initialUrl: AppConstants.viseUrl,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);

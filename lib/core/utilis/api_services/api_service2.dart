@@ -6,7 +6,7 @@ class ApiServicePayMob {
 
   static Dio dio = Dio(
     BaseOptions(
-        baseUrl: AppConstatns.baseUrl,
+        baseUrl: AppConstants.baseUrl,
         headers: {"Content-Type": "application/json"},
         receiveDataWhenStatusError: true),
   );

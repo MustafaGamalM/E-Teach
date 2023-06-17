@@ -49,16 +49,6 @@ class SettingsView extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
-                  cubit.changeTheme();
-                },
-                leading: SvgPicture.asset(ImageAssets.settingsIc),
-                trailing: SvgPicture.asset(ImageAssets.settingsIc),
-                title: Text(AppStrings.changeTheme.tr(),
-                    style: getRegularText(
-                        color: ColorManager.grey, fontSize: 12.sp)),
-              ),
-              ListTile(
-                onTap: () {
                   cubit.shareApp();
                 },
                 leading: SvgPicture.asset(ImageAssets.inviteFriendsIc),

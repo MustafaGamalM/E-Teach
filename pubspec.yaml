@@ -29,16 +29,16 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  awesome_notifications: ^0.7.4+1
   chewie: 
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
   dartz: ^0.10.1
   dio: ^5.0.1
-  easy_localization: ^3.0.2
+  easy_localization: 
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_chat_ui: ^1.6.8
   flutter_launcher_icons: ^0.13.1
   flutter_phoenix: ^1.1.1
   flutter_rating_bar: ^4.0.1

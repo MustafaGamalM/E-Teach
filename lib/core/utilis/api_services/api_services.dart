@@ -9,32 +9,30 @@ import 'dart:convert';
 class ApiService {
   final Dio _dio;
   final AppReference _appRef;
+
   ApiService(this._dio, this._appRef) {
-    // _dio.interceptors.add(InterceptorsWrapper(
-    //   onRequest: (options, handler) async {
-    //     String? token = await _appRef.getToken();
-    //     options.headers['token'] = 'Bearer $token';
-    //     return handler.next(options);
-    //   },
-    //   onResponse: (response, handler) async {
-    //     return handler.next(response);
-    //   },
-    //   onError: (e, handler) async {
-    //     print('caaaaaaallalalalal');
-    //     print('Error: ${e.response?.statusCode}');
-    //     // if (await refreshToken(token)) {
-    //     //   return handler.resolve(await _retry(e.requestOptions));
-    //     // }
-    //     if (e.response?.statusCode == 400 ||
-    //         e.response?.statusCode == 401 ||
-    //         e.response?.statusCode == 403) {
-    //       String? token = await _appRef.getToken();
-    //       await refreshToken(token);
-    //       _retry(e.requestOptions);
-    //     }
-    //   },
-    // )
-    // );
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        String? token = await _appRef.getToken();
+        options.headers['token'] = 'Bearer $token';
+        return handler.next(options);
+      },
+      onError: (e, handler) async {
+        print('caaaaaaallalalalal');
+        print('Error: ${e.response?.statusCode}');
+        if (e.response?.statusCode == 400 ||
+            e.response?.statusCode == 401 ||
+            e.response?.statusCode == 403 ||
+            e.response?.statusCode == 500) {
+          String? token = await _appRef.getToken();
+          bool refreshTokenResult = await refreshToken(token);
+          if (refreshTokenResult) {
+            return handler.resolve(await _retry(e.requestOptions));
+          }
+        }
+        return handler.next(e);
+      },
+    ));
 
     if (kDebugMode) {
       _dio.interceptors.add(PrettyDioLogger(
@@ -46,11 +44,10 @@ class ApiService {
     }
   }
 
-  Future<bool> refreshToken(String token) async {
-    final response = await _dio
-        .post('${AppConstatns.baseUrlApi}${AppConstatns.refreshToken}', data: {
-      'token': token,
-    });
+  Future<bool> refreshToken(String? token) async {
+    final response = await _dio.post(
+        '${AppConstants.baseUrlApi}${AppConstants.refreshToken}',
+        data: {'token': token});
     final jsonResponse = json.decode(response.data);
     RefreshTokenModel baseResponse = RefreshTokenModel.fromJson(jsonResponse);
     if (baseResponse.response!.statusCode == 200) {
@@ -77,7 +74,7 @@ class ApiService {
       Map<String, dynamic>? query,
       Map<String, dynamic>? data}) async {
     var response = await _dio.get(
-      '${AppConstatns.baseUrlApi}$endPoint',
+      '${AppConstants.baseUrlApi}$endPoint',
       queryParameters: query,
       data: data,
     );
@@ -88,7 +85,7 @@ class ApiService {
       {required String endPoint,
       Map<String, dynamic>? query,
       Map<String, dynamic>? data}) async {
-    var response = await _dio.post('${AppConstatns.baseUrlApi}$endPoint',
+    var response = await _dio.post('${AppConstants.baseUrlApi}$endPoint',
         queryParameters: query, data: data);
     return response.data;
   }
@@ -98,7 +95,7 @@ class ApiService {
       Map<String, dynamic>? query,
       required FormData data,
       required Function(int, int) onProgress}) async {
-    var response = await _dio.post('${AppConstatns.baseUrlApi}$endPoint',
+    var response = await _dio.post('${AppConstants.baseUrlApi}$endPoint',
         queryParameters: query, data: data, onSendProgress: onProgress);
     return response.data;
   }
@@ -108,7 +105,7 @@ class ApiService {
       Map<String, dynamic>? query,
       Map<String, dynamic>? data}) async {
     var response = await _dio.delete(
-      '${AppConstatns.baseUrlApi}$endPoint',
+      '${AppConstants.baseUrlApi}$endPoint',
       queryParameters: query,
       data: data,
     );

@@ -12,6 +12,8 @@ class ColorManager {
   static Color grey = const Color(0xff707070);
   static Color grey2 = const Color(0xffB6B7B7);
   static Color black = const Color(0xff000000);
+  static Color semiBlack = const Color(0xff000000).withOpacity(.5);
+
   static Color yellow = const Color(0xffFFD141);
   static Color moveLight = const Color(0xff4900FF);
   static Color babyBlue = const Color(0xff27A6B9);

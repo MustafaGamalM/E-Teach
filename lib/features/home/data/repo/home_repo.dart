@@ -11,7 +11,8 @@ abstract class HomeRepo {
 
   Future<Either<Failure, SingleCourseModel>> getCourseById(int courseId);
   Future<Either<Failure, RoomModel>> getRooms();
-  Future<Either<Failure, RoomChatModel>> getRoomChat(int roomId);
+  Future<Either<Failure, RoomChatModel>> getRoomChat(
+      {required int roomId, String? message});
 
   Future<Either<Failure, RateCourseModel>> rateCourseModel(
       int rateNamber, int courseId);

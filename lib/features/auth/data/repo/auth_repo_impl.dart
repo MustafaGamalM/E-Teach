@@ -15,7 +15,7 @@ class AuthReoImpl implements AuthRepo {
       String email, String password) async {
     try {
       var res = await _apiService.post(
-          endPoint: AppConstatns.loginEndPoint,
+          endPoint: AppConstants.loginEndPoint,
           data: {"email": email, "password": password});
       if (res['Response']['statusCode'] == 200) {
         LoginModel loginModel = LoginModel.fromJson(res);
@@ -43,7 +43,7 @@ class AuthReoImpl implements AuthRepo {
       String email, String name, String password, String type) async {
     try {
       var res = await _apiService.post(
-          endPoint: AppConstatns.registerEndPoint,
+          endPoint: AppConstants.registerEndPoint,
           data: {
             "email": email,
             "password": password,

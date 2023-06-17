@@ -6,7 +6,6 @@ import 'package:e_teach/features/auth/presentation/view/login_view.dart';
 import 'package:e_teach/features/auth/presentation/view/register_view.dart';
 import 'package:e_teach/features/auth/presentation/viewmodel/cubit/auth_cubit.dart';
 import 'package:e_teach/features/auth/presentation/view/forget_password_view.dart';
-import 'package:e_teach/features/home/data/model/course_model.dart';
 import 'package:e_teach/features/home/data/repo/home_repo_impl.dart';
 import 'package:e_teach/features/home/presentation/view/course/paly_course.dart';
 import 'package:e_teach/features/home/presentation/view/course/see_all_courses.dart';

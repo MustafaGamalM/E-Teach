@@ -1,6 +1,5 @@
 import 'package:e_teach/core/utilis/app_manager/assets_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
-import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/styles_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +22,8 @@ class CustomCourse extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppSize.s24),
       child: Container(
-        width: 20.h,
-        height: 20.h,
+        width: 18.h,
+        height: 15.h,
         padding: EdgeInsets.all(AppPadding.p1.h),
         margin: EdgeInsets.all(AppPadding.p1.h),
         alignment: Alignment.center,
@@ -42,7 +41,7 @@ class CustomCourse extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 1.h,
+              height: .5.h,
             ),
             Text(
               courseName,
@@ -58,12 +57,12 @@ class CustomCourse extends StatelessWidget {
               child: RatingBar.builder(
                 initialRating: double.parse('$rate'),
                 minRating: 1,
-                itemSize: 4.w,
+                itemSize: 3.5.w,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => Icon(
+                itemPadding: const EdgeInsets.symmetric(horizontal: 3.0),
+                itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                 ),

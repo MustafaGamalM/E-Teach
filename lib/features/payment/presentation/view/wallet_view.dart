@@ -46,7 +46,7 @@ class _WalletViewState extends State<WalletView> {
                     topRight: Radius.circular(20)),
                 color: Colors.white),
             child: WebView(
-              initialUrl: AppConstatns.walletUrl,
+              initialUrl: AppConstants.walletUrl,
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {
                 _controller.complete(webViewController);

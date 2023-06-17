@@ -23,7 +23,7 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService
-          .post(endPoint: AppConstatns.logoutEndPoint, data: {"token": token});
+          .post(endPoint: AppConstants.logoutEndPoint, data: {"token": token});
       LogoutModel model = LogoutModel.fromJson(res);
       return Right(model);
     } catch (e) {
@@ -44,7 +44,7 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.delete(
-          endPoint: AppConstatns.removeUserEndPoint, query: {"token": token});
+          endPoint: AppConstants.removeUserEndPoint, query: {"token": token});
       RemoveAccountModel model = RemoveAccountModel.fromJson(res);
       if (res['Response']['statusCode'] == 200) {
         return Right(model);
@@ -71,7 +71,7 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.get(
-          endPoint: AppConstatns.getProfileEndPoint, data: {"token": token});
+          endPoint: AppConstants.getProfileEndPoint, data: {"token": token});
       ProfileModel model = ProfileModel.fromJson(res);
       return Right(model);
     } catch (e) {
@@ -93,7 +93,7 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.post(
-          endPoint: AppConstatns.updateProfileEndPoint,
+          endPoint: AppConstants.updateProfileEndPoint,
           data: {
             "token": token,
             "name": name,

@@ -12,10 +12,11 @@ import 'package:e_teach/features/widgets/profile_widget.dart';
 import 'package:e_teach/features/widgets/text_form_filed.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -35,8 +36,11 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
   }
 
-  setName() async {
-    name = await _appReference.getUserName();
+  Future<void> setName() async {
+    String localName = await _appReference.getUserName();
+    setState(() {
+      name = localName;
+    });
   }
 
   @override
@@ -81,8 +85,10 @@ class _HomeViewState extends State<HomeView> {
                 color: ColorManager.white),
             child: RefreshIndicator(
               onRefresh: () async {
-                await MainCubit.get(context).getRooms();
-                await MainCubit.get(context).getCourses();
+                context.read<MainCubit>().getRooms();
+                context.read<MainCubit>().getCourses();
+                //await MainCubit.get(context).getRooms();
+                //await MainCubit.get(context).getCourses();
               },
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),

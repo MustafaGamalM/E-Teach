@@ -19,7 +19,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       emit(GetPaymentAuthRequestErrorSatate());
     }, (r) {
       print(r.data['token']);
-      AppConstatns.authTokenFirst = r.data['token'];
+      AppConstants.authTokenFirst = r.data['token'];
       emit(GetPaymentAuthRequestSuccessSatate());
     });
   }
@@ -40,7 +40,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       print(e.toString());
       emit(GetOrderRegistrationErrorState());
     }, (r) {
-      AppConstatns.orderId = r.data['id'];
+      AppConstants.orderId = r.data['id'];
       getPaymentRequest(
           email: email,
           firstName: firstName,
@@ -72,10 +72,10 @@ class PaymentCubit extends Cubit<PaymentState> {
       print(e.toString());
       emit(GetPaymentKeyErrorState());
     }, (r) {
-      AppConstatns.finalPaymentToken = r.data['token'];
+      AppConstants.finalPaymentToken = r.data['token'];
 
       print("doneeeeeeeeeeeeeeeee");
-      print(AppConstatns.finalPaymentToken);
+      print(AppConstants.finalPaymentToken);
       emit(GetPaymentKeySuccessState());
     });
   }
@@ -89,7 +89,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       emit(GetRefCodeErrorState());
     }, (r) {
       print(r.data['id']);
-      AppConstatns.refCode = r.data['id'];
+      AppConstants.refCode = r.data['id'];
       print('rffffffff');
       emit(GetRefCodeSuccessState());
     });
@@ -105,7 +105,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     }, (r) {
       print(r.data);
       print('walllllet');
-      AppConstatns.walletUrl = r.data['redirection_url'];
+      AppConstants.walletUrl = r.data['redirection_url'];
       print(r.data['redirection_url']);
       emit(GetWalletCodeSuccessState());
     });

@@ -37,7 +37,7 @@ class ReferenceScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    AppConstatns.refCode.toString(),
+                    AppConstants.refCode.toString(),
                     style: const TextStyle(
                       fontSize: 40.0,
                       fontWeight: FontWeight.bold,

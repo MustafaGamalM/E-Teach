@@ -236,15 +236,15 @@ class _CourseDetailsState extends State<CourseDetails> {
                     margin: EdgeInsets.symmetric(horizontal: 3.w),
                     padding: EdgeInsets.only(left: 3.w, top: 2.h, bottom: 2.h),
                     decoration: BoxDecoration(
-                        color: ColorManager.grey2,
-                        borderRadius: BorderRadius.circular(8)),
+                        color: ColorManager.primaryLight,
+                        borderRadius: BorderRadius.circular(25)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '${index + 1} -    ${videos[index].name!}',
                           style: TextStyle(
-                              color: ColorManager.black, fontSize: 14.sp),
+                              color: ColorManager.semiBlack, fontSize: 14.sp),
                         ),
                         IconButton(
                             onPressed: () {
@@ -252,7 +252,10 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 videos[index].videos!,
                               );
                             },
-                            icon: Icon(Icons.download))
+                            icon: Icon(
+                              Icons.download,
+                              color: ColorManager.semiBlack,
+                            ))
                       ],
                     ))),
           );

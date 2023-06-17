@@ -44,7 +44,8 @@ class RoomDesriptionView extends StatelessWidget {
               },
               child: IconButton(
                   onPressed: () {
-                    MainCubit.get(context).getRoomChat(roomId);
+                    MainCubit.get(context)
+                        .getRoomChat(roomId: roomId, inChat: false);
                   },
                   icon: Icon(
                     Icons.chat_bubble,

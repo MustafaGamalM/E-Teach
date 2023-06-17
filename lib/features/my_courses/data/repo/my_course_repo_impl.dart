@@ -19,7 +19,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.get(
-          endPoint: AppConstatns.myCoursesEndPoint, query: {"token": token});
+          endPoint: AppConstants.myCoursesEndPoint, query: {"token": token});
       if (res['Response'] != null) {
         MyCoursesModel myCoursesModel = MyCoursesModel.fromJson(res);
 
@@ -47,7 +47,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
     try {
       String token = await _appReference.getToken();
       var res = await _apiService.post(
-          endPoint: AppConstatns.createCourseEndPoint,
+          endPoint: AppConstants.createCourseEndPoint,
           data: {"token": token, "name": name});
       if (res['Response']['statusCode'] == 200) {
         CreateCourseModel myCoursesModel = CreateCourseModel.fromJson(res);
@@ -75,7 +75,7 @@ class MyCoursesRepoImpl implements MyCoursesRepo {
       FormData formData, Function(int, int) onProgress) async {
     try {
       var res = await _apiService.postFile(
-          endPoint: AppConstatns.uploadCourseEndPoint,
+          endPoint: AppConstants.uploadCourseEndPoint,
           data: formData,
           onProgress: onProgress);
       if (res['Response']['statusCode'] == 200) {

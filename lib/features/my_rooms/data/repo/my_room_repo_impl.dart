@@ -19,7 +19,7 @@ class MyRoomRepoImpl implements MyRoomRepo {
     var token = await _appReference.getToken();
     try {
       var res = await _apiService.post(
-          endPoint: AppConstatns.createMyRoomEndPoint,
+          endPoint: AppConstants.createMyRoomEndPoint,
           data: {"name": name, "token": token, "description": description});
 
       if (res != null) {
@@ -49,7 +49,7 @@ class MyRoomRepoImpl implements MyRoomRepo {
     var token = await _appReference.getToken();
     try {
       var res =
-          await _apiService.get(endPoint: AppConstatns.myRoomEndPoint, query: {
+          await _apiService.get(endPoint: AppConstants.myRoomEndPoint, query: {
         "token": token,
       });
 
