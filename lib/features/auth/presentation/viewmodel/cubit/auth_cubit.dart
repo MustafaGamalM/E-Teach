@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/color_manager.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';

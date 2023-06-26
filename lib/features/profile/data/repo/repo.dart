@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
-import 'package:e_teach/features/profile/data/data/myprofile_model.dart';
-import 'package:e_teach/features/profile/data/data/profile_model.dart';
-import 'package:e_teach/features/profile/data/data/remove_account.dart';
-import 'package:e_teach/features/profile/data/data/update_profile.dart';
+import 'package:e_teach/features/profile/data/model/myprofile_model.dart';
+import 'package:e_teach/features/profile/data/model/profile_model.dart';
+import 'package:e_teach/features/profile/data/model/remove_account.dart';
+import 'package:e_teach/features/profile/data/model/update_profile.dart';
 
 abstract class ProfileRepo {
   Future<Either<Failure, LogoutModel>> logout();

@@ -3,12 +3,12 @@ import 'package:e_teach/constatns.dart';
 import 'package:e_teach/core/utilis/api_services/api_services.dart';
 import 'package:e_teach/core/utilis/app_manager/app_reference.dart';
 import 'package:e_teach/core/utilis/app_manager/strings_manager.dart';
-import 'package:e_teach/features/profile/data/data/myprofile_model.dart';
-import 'package:e_teach/features/profile/data/data/profile_model.dart';
+import 'package:e_teach/features/profile/data/model/myprofile_model.dart';
+import 'package:e_teach/features/profile/data/model/profile_model.dart';
 import 'package:e_teach/core/error_handler/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:e_teach/features/profile/data/data/remove_account.dart';
-import 'package:e_teach/features/profile/data/data/update_profile.dart';
+import 'package:e_teach/features/profile/data/model/remove_account.dart';
+import 'package:e_teach/features/profile/data/model/update_profile.dart';
 import 'package:e_teach/features/profile/data/repo/repo.dart';
 import 'package:easy_localization/easy_localization.dart';
 

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_teach/features/profile/data/data/myprofile_model.dart';
+import 'package:e_teach/features/profile/data/model/myprofile_model.dart';
 import 'package:e_teach/features/profile/data/repo/repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
